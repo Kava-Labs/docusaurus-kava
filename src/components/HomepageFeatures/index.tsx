@@ -1,6 +1,6 @@
-import React from "react";
-import clsx from "clsx";
-import styles from "./styles.module.css";
+import React from 'react';
+import clsx from 'clsx';
+import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
@@ -10,7 +10,7 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Easy to Use",
+    title: 'Easy to Use',
     image: null,
     description: (
       <>
@@ -20,7 +20,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: "Focus on What Matters",
+    title: 'Focus on What Matters',
     image: null,
     description: (
       <>
@@ -30,7 +30,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: "Powered by React",
+    title: 'Powered by React',
     image: null,
     description: (
       <>
@@ -43,7 +43,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, image, description }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
+    <div className={clsx('col col--4')}>
       <div className="text--center">
         <img className={styles.featureSvg} alt={title} src={image} />
       </div>
