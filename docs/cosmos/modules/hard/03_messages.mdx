@@ -53,6 +53,6 @@ type MsgLiquidate struct {
 }
 ```
 
-This message deletes `Borrower's` `Deposit` and `Borrow` objects if they are below the required LTV ratio. The keeper (the sender of the message) is rewarded a portion of the borrow position, according to the `KeeperReward` governance parameter. The coins from the `Deposit` are then sold at auction (see [auction module](../../auction/spec/README.md)), which any remaining tokens returned to `Borrower`. After being liquidated, `Borrower` no longer must repay the borrow amount. The global variables for `TotalSupplied` and `TotalBorrowed` are updated.
+This message deletes `Borrower's` `Deposit` and `Borrow` objects if they are below the required LTV ratio. The keeper (the sender of the message) is rewarded a portion of the borrow position, according to the `KeeperReward` governance parameter. The coins from the `Deposit` are then sold at auction (see [auction module](../../modules/auction)), which any remaining tokens returned to `Borrower`. After being liquidated, `Borrower` no longer must repay the borrow amount. The global variables for `TotalSupplied` and `TotalBorrowed` are updated.
 
 
