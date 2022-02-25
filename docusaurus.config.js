@@ -14,7 +14,7 @@ const config = {
   onBrokenMarkdownLinks: "warn",
   favicon: "img/kava.svg",
   organizationName: "kava labs", // Usually your GitHub org/user name.
-  projectName: "docs", // Usually your repo name.
+  projectName: "Kava Documentation", // Usually your repo name.
 
   presets: [
     [
