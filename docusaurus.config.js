@@ -10,7 +10,7 @@ const config = {
   tagline: "Kava",
   url: "https://your-docusaurus-test-site.com",
   baseUrl: "/",
-  onBrokenLinks: "ignore",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/kava.svg",
   organizationName: "kava labs", // Usually your GitHub org/user name.
