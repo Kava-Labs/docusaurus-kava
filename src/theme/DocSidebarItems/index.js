@@ -11,11 +11,15 @@ import {
   useWindowSize,
 } from '@docusaurus/theme-common';
 import MobileSocialLinks from '@site/src/components/MobileSocialLinks';
+import styles from '@site/src/theme/Navbar/styles.module.css';
+import Toggle from '@site/src/theme/Toggle';
+import { useColorModeToggle } from '@site/src/theme/Navbar';
 
 // TODO this item should probably not receive the "activePath" props
 // TODO this triggers whole sidebar re-renders on navigation
 function DocSidebarItems({ items, ...props }) {
   const windowSize = useWindowSize();
+  const colorModeToggle = useColorModeToggle();
 
   return (
     <DocSidebarItemsExpandedStateProvider>
@@ -27,7 +31,16 @@ function DocSidebarItems({ items, ...props }) {
           {...props}
         />
       ))}
-      {windowSize === 'mobile' && <MobileSocialLinks />}
+      {windowSize === 'mobile' && (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <MobileSocialLinks />
+          <Toggle
+            className={styles.toggle}
+            checked={colorModeToggle.isDarkTheme}
+            onChange={colorModeToggle.toggle}
+          />
+        </div>
+      )}
     </DocSidebarItemsExpandedStateProvider>
   );
 } // Optimize sidebar at each "level"

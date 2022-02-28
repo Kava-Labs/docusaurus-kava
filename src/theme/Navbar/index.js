@@ -79,7 +79,7 @@ function useMobileSidebar() {
   };
 }
 
-function useColorModeToggle() {
+export function useColorModeToggle() {
   const {
     colorMode: { disableSwitch },
   } = useThemeConfig();
@@ -266,7 +266,7 @@ export default function Navbar() {
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
-          {!colorModeToggle.disabled && (
+          {!colorModeToggle.disabled && windowSize === 'desktop' && (
             <Toggle
               className={styles.toggle}
               checked={colorModeToggle.isDarkTheme}
