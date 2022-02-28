@@ -49,7 +49,6 @@ function splitNavItemsByPosition(items) {
 
 function useMobileSidebar() {
   const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
-
   const shouldRender = windowSize === 'mobile'; // || windowSize === 'ssr';
 
   const [shown, setShown] = useState(false); // Close mobile sidebar on navigation pop
@@ -149,11 +148,11 @@ function useSecondaryMenu({ sidebarShown, toggleSidebar }) {
 function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
   useLockBodyScroll(sidebarShown);
   const items = useNavbarItems();
-  const colorModeToggle = useColorModeToggle();
   const secondaryMenu = useSecondaryMenu({
     sidebarShown,
     toggleSidebar,
   });
+
   return (
     <div className="navbar-sidebar">
       <div className="navbar-sidebar__brand">
@@ -162,13 +161,6 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
           imageClassName="navbar__logo"
           titleClassName="navbar__title"
         />
-        {!colorModeToggle.disabled && (
-          <Toggle
-            className={styles.navbarSidebarToggle}
-            checked={colorModeToggle.isDarkTheme}
-            onChange={colorModeToggle.toggle}
-          />
-        )}
         <button
           type="button"
           className="clean-btn navbar-sidebar__close"
@@ -227,6 +219,8 @@ export default function Navbar() {
   const items = useNavbarItems();
   const hasSearchNavbarItem = items.some((item) => item.type === 'search');
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
+  const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
+
   return (
     <nav
       ref={navbarRef}
@@ -241,6 +235,14 @@ export default function Navbar() {
     >
       <div className="navbar__inner">
         <div className="navbar__items">
+          <Logo
+            className="navbar__brand"
+            imageClassName="navbar__logo"
+            titleClassName="navbar__title"
+          />
+          {leftItems.map((item, i) => (
+            <NavbarItem {...item} key={i} />
+          ))}
           {(items?.length > 0 || activeDocPlugin) && (
             <button
               aria-label="Navigation bar toggle"
@@ -253,20 +255,12 @@ export default function Navbar() {
               <IconMenu />
             </button>
           )}
-          <Logo
-            className="navbar__brand"
-            imageClassName="navbar__logo"
-            titleClassName="navbar__title"
-          />
-          {leftItems.map((item, i) => (
-            <NavbarItem {...item} key={i} />
-          ))}
         </div>
         <div className="navbar__items navbar__items--right">
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
-          {!colorModeToggle.disabled && (
+          {!colorModeToggle.disabled && windowSize === 'desktop' && (
             <Toggle
               className={styles.toggle}
               checked={colorModeToggle.isDarkTheme}

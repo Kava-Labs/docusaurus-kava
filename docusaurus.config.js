@@ -50,7 +50,7 @@ const config = {
             label: 'Developer Docs',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/Kava-Labs',
             label: 'GitHub',
             position: 'right',
           },
