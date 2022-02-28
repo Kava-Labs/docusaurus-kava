@@ -11,5 +11,5 @@ export default function SearchNavbarItem({ mobile }) {
     return null;
   }
 
-  return <SearchBar />;
+  return <SearchNavbarItem />;
 }

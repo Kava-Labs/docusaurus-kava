@@ -7,7 +7,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Translate from '@docusaurus/Translate';
-import SearchBar from '@theme/SearchBar';
 import Toggle from '@theme/Toggle';
 import {
   useThemeConfig,
@@ -24,7 +23,8 @@ import NavbarItem from '@theme/NavbarItem';
 import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
 import IconClose from '@theme/IconClose';
-import styles from './styles.module.css'; // retrocompatible with v1
+import styles from './styles.module.css';
+import SearchBar from '@site/src/theme/SearchBar';
 
 const DefaultNavItemPosition = 'right';
 
@@ -221,11 +221,6 @@ export default function Navbar() {
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
   const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
 
-  const mobileStyleAdjustment =
-    windowSize === 'mobile'
-      ? "justifyContent: 'space-between', align-items: 'center', display: 'flex', flex: 1, min-width: 0,"
-      : '';
-
   return (
     <nav
       ref={navbarRef}
@@ -236,11 +231,10 @@ export default function Navbar() {
         [styles.navbarHideable]: hideOnScroll,
         [styles.navbarHidden]: hideOnScroll && !isNavbarVisible,
       })}
-      style={{ height: '83px' }}
+      style={{ height: '83px', alignItems: 'center' }}
     >
       <div className="navbar__inner">
         <div className="navbar__items">
-          {/*<span style={{ mobileStyleAdjustment }}>*/}
           <Logo
             className="navbar__brand"
             imageClassName="navbar__logo"
@@ -250,6 +244,8 @@ export default function Navbar() {
             <NavbarItem {...item} key={i} />
           ))}
         </div>
+        {windowSize === 'mobile' && <SearchBar />}
+
         <div className="navbar__items navbar__items--right">
           {(items?.length > 0 || activeDocPlugin) && (
             <button
@@ -273,7 +269,7 @@ export default function Navbar() {
               onChange={colorModeToggle.toggle}
             />
           )}
-          {!hasSearchNavbarItem && <SearchBar />}
+          {windowSize === 'desktop' && <SearchBar />}
         </div>
       </div>
 
