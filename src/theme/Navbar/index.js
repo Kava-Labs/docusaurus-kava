@@ -221,6 +221,11 @@ export default function Navbar() {
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
   const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
 
+  const mobileStyleAdjustment =
+    windowSize === 'mobile'
+      ? "justifyContent: 'space-between', align-items: 'center', display: 'flex', flex: 1, min-width: 0,"
+      : '';
+
   return (
     <nav
       ref={navbarRef}
@@ -235,6 +240,7 @@ export default function Navbar() {
     >
       <div className="navbar__inner">
         <div className="navbar__items">
+          {/*<span style={{ mobileStyleAdjustment }}>*/}
           <Logo
             className="navbar__brand"
             imageClassName="navbar__logo"
@@ -243,6 +249,8 @@ export default function Navbar() {
           {leftItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
+        </div>
+        <div className="navbar__items navbar__items--right">
           {(items?.length > 0 || activeDocPlugin) && (
             <button
               aria-label="Navigation bar toggle"
@@ -255,12 +263,10 @@ export default function Navbar() {
               <IconMenu />
             </button>
           )}
-        </div>
-        <div className="navbar__items navbar__items--right">
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
-          {!colorModeToggle.disabled && windowSize === 'desktop' && (
+          {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
               checked={colorModeToggle.isDarkTheme}
