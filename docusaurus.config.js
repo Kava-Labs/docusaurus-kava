@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Developer Docs',
+  title: 'Kava',
   tagline: 'Kava',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
@@ -37,7 +37,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Developer Docs',
+        title: '',
         logo: {
           alt: 'Kava Logo',
           src: 'img/kava.svg',
@@ -47,7 +47,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Documentation',
+            label: 'Developer Docs',
           },
           {
             href: 'https://github.com/facebook/docusaurus',
