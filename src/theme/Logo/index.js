@@ -9,7 +9,7 @@ import Link from '@docusaurus/Link';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useThemeConfig } from '@docusaurus/theme-common';
+import { useThemeConfig, useWindowSize } from '@docusaurus/theme-common';
 export default function Logo(props) {
   const {
     siteConfig: { title },
@@ -22,6 +22,7 @@ export default function Logo(props) {
       },
     },
   } = useThemeConfig();
+  const windowSize = useWindowSize();
   const { imageClassName, titleClassName, ...propsRest } = props;
   const logoLink = useBaseUrl(logo.href || '/');
   const sources = {
@@ -53,21 +54,23 @@ export default function Logo(props) {
           ))}
         {navbarTitle != null && <b className={titleClassName}>{navbarTitle}</b>}
       </Link>
-      <svg
-        width="1"
-        height="51"
-        viewBox="0 0 1 51"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <line
-          x1="0.5"
-          y1="-2.18557e-08"
-          x2="0.500002"
-          y2="51"
-          stroke="#B4B9BB"
-        />
-      </svg>
+      {windowSize === 'desktop' && (
+        <svg
+          width="1"
+          height="51"
+          viewBox="0 0 1 51"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="0.5"
+            y1="-2.18557e-08"
+            x2="0.500002"
+            y2="51"
+            stroke="#B4B9BB"
+          />
+        </svg>
+      )}
     </>
   );
 }

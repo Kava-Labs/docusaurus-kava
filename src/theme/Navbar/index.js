@@ -237,6 +237,7 @@ export default function Navbar() {
         [styles.navbarHideable]: hideOnScroll,
         [styles.navbarHidden]: hideOnScroll && !isNavbarVisible,
       })}
+      style={{ height: '83px' }}
     >
       <div className="navbar__inner">
         <div className="navbar__items">
