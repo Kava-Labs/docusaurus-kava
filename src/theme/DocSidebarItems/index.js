@@ -22,29 +22,34 @@ function DocSidebarItems({ items, ...props }) {
   const windowSize = useWindowSize();
   const colorModeToggle = useColorModeToggle();
 
+  items.map((item, index) => console.log(item, index));
+
   return (
     <DocSidebarItemsExpandedStateProvider>
       {items.map((item, index) => (
-        <DocSidebarItem
-          key={index} // sidebar is static, the index does not change
-          item={item}
-          index={index}
-          {...props}
-          style={{ fontFamily: 'Inter' }}
-        />
-      ))}
-      {windowSize === 'mobile' && (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <MobileSocialLinks />
-          <Toggle
-            className={styles.toggle}
-            checked={colorModeToggle.isDarkTheme}
-            onChange={colorModeToggle.toggle}
+        <>
+          <DocSidebarItem
+            key={index} // sidebar is static, the index does not change
+            item={item}
+            index={index}
+            {...props}
+            style={{ fontFamily: 'Inter' }}
           />
-        </div>
-      )}
+          {/*only display social links below the very last expanded tab*/}
+          {windowSize === 'mobile' && item.label === 'Participate In Network' && (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <MobileSocialLinks />
+              <Toggle
+                className={styles.toggle}
+                checked={colorModeToggle.isDarkTheme}
+                onChange={colorModeToggle.toggle}
+              />
+            </div>
+          )}
+        </>
+      ))}
     </DocSidebarItemsExpandedStateProvider>
   );
-} // Optimize sidebar at each "level"
+}
 
 export default memo(DocSidebarItems);
