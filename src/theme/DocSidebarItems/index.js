@@ -14,6 +14,7 @@ import MobileSocialLinks from '@site/src/components/MobileSocialLinks';
 import styles from '@site/src/theme/Navbar/styles.module.css';
 import Toggle from '@site/src/theme/Toggle';
 import { useColorModeToggle } from '@site/src/theme/Navbar';
+import '@fontsource/inter';
 
 // TODO this item should probably not receive the "activePath" props
 // TODO this triggers whole sidebar re-renders on navigation
@@ -29,6 +30,7 @@ function DocSidebarItems({ items, ...props }) {
           item={item}
           index={index}
           {...props}
+          style={{ fontFamily: 'Inter' }}
         />
       ))}
       {windowSize === 'mobile' && (

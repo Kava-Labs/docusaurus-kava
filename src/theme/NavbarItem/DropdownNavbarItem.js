@@ -56,6 +56,11 @@ function DropdownNavbarItemDesktop({ items, position, className, ...props }) {
       document.removeEventListener('touchstart', handleClickOutside);
     };
   }, [dropdownRef]);
+
+  const subtitleStyle = {
+    color: 'black',
+  };
+
   return (
     <div
       ref={dropdownRef}
@@ -66,7 +71,8 @@ function DropdownNavbarItemDesktop({ items, position, className, ...props }) {
     >
       <NavbarNavLink
         href={props.to ? undefined : '#'}
-        className={clsx('navbar__link', className)}
+        className={clsx('navbar__link', subtitleStyle)}
+        // className={item.type === 'docs' ? clsx('navbar__link', subtitleStyle)  : clsx('navbar__link', className)}
         {...props}
         onClick={props.to ? undefined : (e) => e.preventDefault()}
         onKeyDown={(e) => {

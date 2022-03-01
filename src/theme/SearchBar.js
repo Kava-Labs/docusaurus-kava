@@ -17,5 +17,26 @@ export default function SearchBar() {
   const windowSize = useWindowSize();
 
   //  todo - get search from another theme so we don't rebuild mobile design
-  return windowSize === 'desktop' ? <input /> : <div>Search icon</div>;
+  return windowSize === 'desktop' ? (
+    <input />
+  ) : (
+    <div style={{ display: 'flex', alignItems: 'center', marginRight: '24px' }}>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 15 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="6.5" cy="6.5" r="6" stroke="#1E1E1E" />
+        <line
+          x1="10.3536"
+          y1="10.6464"
+          x2="14.3536"
+          y2="14.6464"
+          stroke="#1E1E1E"
+        />
+      </svg>
+    </div>
+  );
 }

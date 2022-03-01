@@ -25,6 +25,7 @@ import IconMenu from '@theme/IconMenu';
 import IconClose from '@theme/IconClose';
 import styles from './styles.module.css';
 import SearchBar from '@site/src/theme/SearchBar';
+import '@fontsource/inter';
 
 const DefaultNavItemPosition = 'right';
 
@@ -154,7 +155,7 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
   });
 
   return (
-    <div className="navbar-sidebar">
+    <div style={{ fontFamily: 'Inter' }} className="navbar-sidebar">
       <div className="navbar-sidebar__brand">
         <Logo
           className="navbar__brand"
@@ -217,7 +218,8 @@ export default function Navbar() {
   const activeDocPlugin = useActivePlugin();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
   const items = useNavbarItems();
-  const hasSearchNavbarItem = items.some((item) => item.type === 'search');
+  //  reimplement if we get to search
+  // const hasSearchNavbarItem = items.some((item) => item.type === 'search');
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
   const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
 
