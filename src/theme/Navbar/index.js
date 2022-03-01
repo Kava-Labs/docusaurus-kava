@@ -24,7 +24,7 @@ import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
 import IconClose from '@theme/IconClose';
 import styles from './styles.module.css';
-import SearchBar from '@site/src/theme/SearchBar';
+import SearchBar from '@site/src/theme/SearchBar/SearchBar';
 import '@fontsource/inter';
 
 const DefaultNavItemPosition = 'right';

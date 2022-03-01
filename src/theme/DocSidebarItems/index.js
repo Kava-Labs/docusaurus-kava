@@ -14,6 +14,7 @@ import MobileSocialLinks from '@site/src/components/MobileSocialLinks';
 import styles from '@site/src/theme/Navbar/styles.module.css';
 import Toggle from '@site/src/theme/Toggle';
 import { useColorModeToggle } from '@site/src/theme/Navbar';
+import classes from './style.module.css';
 import '@fontsource/inter';
 
 // TODO this item should probably not receive the "activePath" props
@@ -34,7 +35,7 @@ function DocSidebarItems({ items, ...props }) {
           />
           {/*only display social links below the very last expanded tab*/}
           {windowSize === 'mobile' && index === items.length - 1 && (
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className={classes.linksWrapper}>
               <MobileSocialLinks />
               <Toggle
                 className={styles.toggle}

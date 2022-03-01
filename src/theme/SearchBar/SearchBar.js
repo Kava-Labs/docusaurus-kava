@@ -12,6 +12,7 @@
 
 import React from 'react';
 import { useWindowSize } from '@docusaurus/theme-common';
+import classes from './style.module.css';
 
 export default function SearchBar() {
   const windowSize = useWindowSize();
@@ -20,7 +21,7 @@ export default function SearchBar() {
   return windowSize === 'desktop' ? (
     <input />
   ) : (
-    <div style={{ display: 'flex', alignItems: 'center', marginRight: '24px' }}>
+    <div className={classes.searchWrapper}>
       <svg
         width="15"
         height="15"

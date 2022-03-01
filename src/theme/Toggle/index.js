@@ -7,11 +7,9 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import { useThemeConfig } from '@docusaurus/theme-common';
 import useIsBrowser from '@docusaurus/useIsBrowser';
-import { translate } from '@docusaurus/Translate';
-import clsx from 'clsx';
-import styles from './styles.module.css'; // Based on react-toggle (https://github.com/aaronshaf/react-toggle/).
 import DarkModeIcon from '@site/src/components/icons/DarkModeIcon';
 import LightModeIcon from '@site/src/components/icons/LightModeIcon';
+import classes from './styles.module.css';
 
 const ToggleComponent = memo(
   ({
@@ -35,11 +33,7 @@ const ToggleComponent = memo(
           onClick={onChange}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          style={{
-            border: 'none',
-            backgroundColor: 'inherit',
-            cursor: 'pointer',
-          }}
+          className={classes.customToggleStyle}
         >
           {checked ? (
             <span style={lightIconStyle}>

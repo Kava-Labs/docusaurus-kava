@@ -10,6 +10,7 @@ import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { useThemeConfig, useWindowSize } from '@docusaurus/theme-common';
+import classes from './style.module.css';
 
 export default function Logo(props) {
   const {
@@ -56,7 +57,7 @@ export default function Logo(props) {
         {navbarTitle != null && <b className={titleClassName}>{navbarTitle}</b>}
       </Link>
       {windowSize === 'desktop' && (
-        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+        <div className={classes.desktopLogoWrapper}>
           <svg
             width="1"
             height="51"
@@ -72,9 +73,7 @@ export default function Logo(props) {
               stroke="#B4B9BB"
             />
           </svg>
-          <h3 style={{ marginLeft: '16px', fontWeight: 500 }}>
-            Developer Docs
-          </h3>
+          <h3 className={classes.subtitleWrapper}>Developer Docs</h3>
         </div>
       )}
     </>

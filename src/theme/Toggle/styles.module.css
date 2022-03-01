@@ -5,6 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+.customToggleStyle {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+
 .toggle {
   touch-action: pan-x;
   position: relative;
