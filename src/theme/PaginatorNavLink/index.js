@@ -9,9 +9,9 @@ import Link from '@docusaurus/Link';
 export default function PaginatorNavLink(props) {
   const { permalink, title, subLabel } = props;
   return (
-    <Link to={permalink}>
+    <Link to={permalink} style={{ color: 'var(--ifm-navbar-link-color)' }}>
       {subLabel && <div className="pagination-nav__sublabel">{subLabel}</div>}
-      <div className="pagination-nav__label">{title}</div>
+      <h3 className="pagination-nav__label">{title}</h3>
     </Link>
   );
 }
