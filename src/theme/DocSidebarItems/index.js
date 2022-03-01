@@ -22,8 +22,6 @@ function DocSidebarItems({ items, ...props }) {
   const windowSize = useWindowSize();
   const colorModeToggle = useColorModeToggle();
 
-  items.map((item, index) => console.log(item, index));
-
   return (
     <DocSidebarItemsExpandedStateProvider>
       {items.map((item, index) => (

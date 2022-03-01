@@ -43,12 +43,6 @@ const config = {
           src: 'img/kava.svg',
         },
         items: [
-          // {
-          //   type: 'doc',
-          //   docId: 'intro',
-          //   position: 'left',
-          //   label: 'Developer Docs',
-          // },
           {
             href: 'https://github.com/Kava-Labs',
             label: 'GitHub',
