@@ -6,9 +6,9 @@
  */
 
 .customToggleStyle {
-  display: flex;
-  align-items: center;
-  margin-right: 24px;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
 }
 
 .toggle {
