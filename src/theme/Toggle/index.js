@@ -11,44 +11,27 @@ import DarkModeIcon from '@site/src/components/icons/DarkModeIcon';
 import LightModeIcon from '@site/src/components/icons/LightModeIcon';
 import classes from './styles.module.css';
 
-const ToggleComponent = memo(
-  ({
-    className,
-    switchConfig,
-    checked: defaultChecked,
-    disabled,
-    onChange,
-  }) => {
-    const { darkIconStyle, lightIconStyle } = switchConfig;
-    const [checked, setChecked] = useState(defaultChecked);
-    const [focused, setFocused] = useState(false);
-    const inputRef = useRef(null);
-    useEffect(() => {
-      setChecked(defaultChecked);
-    }, [defaultChecked]);
+const ToggleComponent = memo(({ checked: defaultChecked, onChange }) => {
+  const [checked, setChecked] = useState(defaultChecked);
+  const [focused, setFocused] = useState(false);
+  const inputRef = useRef(null);
+  useEffect(() => {
+    setChecked(defaultChecked);
+  }, [defaultChecked]);
 
-    return (
-      <div>
-        <button
-          onClick={onChange}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          className={classes.customToggleStyle}
-        >
-          {checked ? (
-            <span style={lightIconStyle}>
-              <LightModeIcon />
-            </span>
-          ) : (
-            <span style={darkIconStyle}>
-              <DarkModeIcon />
-            </span>
-          )}
-        </button>
-      </div>
-    );
-  }
-);
+  return (
+    <div>
+      <button
+        onClick={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        className={classes.customToggleStyle}
+      >
+        {checked ? <LightModeIcon /> : <DarkModeIcon />}
+      </button>
+    </div>
+  );
+});
 export default function Toggle(props) {
   const {
     colorMode: { switchConfig },

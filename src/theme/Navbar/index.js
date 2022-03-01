@@ -7,7 +7,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Translate from '@docusaurus/Translate';
-import Toggle from '@theme/Toggle';
 import {
   useThemeConfig,
   useMobileSecondaryMenuRenderer,
@@ -26,6 +25,7 @@ import IconClose from '@theme/IconClose';
 import styles from './styles.module.css';
 import SearchBar from '@site/src/theme/SearchBar/SearchBar';
 import '@fontsource/inter';
+import Toggle from '@site/src/theme/Toggle';
 
 const DefaultNavItemPosition = 'right';
 
@@ -265,11 +265,13 @@ export default function Navbar() {
             <NavbarItem {...item} key={i} />
           ))}
           {!colorModeToggle.disabled && windowSize === 'desktop' && (
-            <Toggle
-              className={styles.toggle}
-              checked={colorModeToggle.isDarkTheme}
-              onChange={colorModeToggle.toggle}
-            />
+            <div className="navbar__item">
+              <Toggle
+                className={styles.toggle}
+                checked={colorModeToggle.isDarkTheme}
+                onChange={colorModeToggle.toggle}
+              />
+            </div>
           )}
           {windowSize === 'desktop' && <SearchBar />}
         </div>
