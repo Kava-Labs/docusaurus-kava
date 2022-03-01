@@ -31,7 +31,6 @@ function DocSidebarItems({ items, ...props }) {
             item={item}
             index={index}
             {...props}
-            style={{ fontFamily: 'Inter' }}
           />
           {/*only display social links below the very last expanded tab*/}
           {windowSize === 'mobile' && item.label === 'Participate In Network' && (
