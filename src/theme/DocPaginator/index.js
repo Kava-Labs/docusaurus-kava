@@ -7,6 +7,8 @@
 import React from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import PaginatorNavLink from '@theme/PaginatorNavLink';
+import classes from './styles.module.css';
+
 export default function DocPaginator(props) {
   const { previous, next } = props;
   return (
@@ -18,23 +20,10 @@ export default function DocPaginator(props) {
         description: 'The ARIA label for the docs pagination',
       })}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <div
-          style={{
-            flexGrow: 1,
-            flexShrink: 1,
-            flexBasis: '50%',
-            maxWidth: '50%',
-          }}
-        >
+      <div className={classes.outerWrapper}>
+        <div className={classes.innerWrapper}>
           {previous && (
-            <div style={{ display: 'flex', fontWeight: 100 }}>
+            <div className={classes.subtitle}>
               <PaginatorNavLink
                 {...previous}
                 subLabel={
@@ -49,17 +38,9 @@ export default function DocPaginator(props) {
             </div>
           )}
         </div>
-        <div
-          className="pagination-nav__item--next"
-          style={{
-            lexGrow: 1,
-            flexShrink: 1,
-            flexBasis: '50%',
-            maxWidth: '50%',
-          }}
-        >
+        <div className="pagination-nav__item--next">
           {next && (
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div className={classes.navLinkWrapper}>
               <PaginatorNavLink
                 {...next}
                 subLabel={

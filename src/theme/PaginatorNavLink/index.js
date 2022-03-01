@@ -26,8 +26,8 @@ export default function PaginatorNavLink(props) {
     >
       {isNext ? <NextArrow /> : <PreviousArrow />}
       <div>
-        {subLabel && <h6 style={{ fontWeight: 400 }}>{subLabel}</h6>}
-        <h4 style={{ fontWeight: 700 }}>{title}</h4>
+        {subLabel && <h6 className={classes.subtitle}>{subLabel}</h6>}
+        <h4 className={classes.title}>{title}</h4>
       </div>
     </Link>
   );
