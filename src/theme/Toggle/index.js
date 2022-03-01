@@ -10,8 +10,8 @@ import useIsBrowser from '@docusaurus/useIsBrowser';
 import { translate } from '@docusaurus/Translate';
 import clsx from 'clsx';
 import styles from './styles.module.css'; // Based on react-toggle (https://github.com/aaronshaf/react-toggle/).
-import DarkModeIcon from '@site/src/components/DarkModeIcon';
-import LightModeIcon from '@site/src/components/LightModeIcon';
+import DarkModeIcon from '@site/src/components/icons/DarkModeIcon';
+import LightModeIcon from '@site/src/components/icons/LightModeIcon';
 
 const ToggleComponent = memo(
   ({
