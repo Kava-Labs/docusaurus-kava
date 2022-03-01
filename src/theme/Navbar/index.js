@@ -155,7 +155,7 @@ function NavbarMobileSidebar({ sidebarShown, toggleSidebar }) {
   });
 
   return (
-    <div style={{ fontFamily: 'Inter' }} className="navbar-sidebar">
+    <div className="navbar-sidebar">
       <div className="navbar-sidebar__brand">
         <Logo
           className="navbar__brand"
