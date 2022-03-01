@@ -33,7 +33,7 @@ function DocSidebarItems({ items, ...props }) {
             {...props}
           />
           {/*only display social links below the very last expanded tab*/}
-          {windowSize === 'mobile' && item.label === 'Participate In Network' && (
+          {windowSize === 'mobile' && index === items.length - 1 && (
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <MobileSocialLinks />
               <Toggle
