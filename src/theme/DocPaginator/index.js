@@ -34,40 +34,44 @@ export default function DocPaginator(props) {
           }}
         >
           {previous && (
-            <PaginatorNavLink
-              {...previous}
-              subLabel={
-                <Translate
-                  id="theme.docs.paginator.previous"
-                  description="The label used to navigate to the previous doc"
-                >
-                  Previous
-                </Translate>
-              }
-            />
+            <div style={{ display: 'flex', fontWeight: 100 }}>
+              <PaginatorNavLink
+                {...previous}
+                subLabel={
+                  <Translate
+                    id="theme.docs.paginator.previous"
+                    description="The label used to navigate to the previous doc"
+                  >
+                    Previous
+                  </Translate>
+                }
+              />
+            </div>
           )}
         </div>
         <div
           className="pagination-nav__item--next"
           style={{
-            /* display: flex; */ flexGrow: 1,
+            lexGrow: 1,
             flexShrink: 1,
             flexBasis: '50%',
             maxWidth: '50%',
           }}
         >
           {next && (
-            <PaginatorNavLink
-              {...next}
-              subLabel={
-                <Translate
-                  id="theme.docs.paginator.next"
-                  description="The label used to navigate to the next doc"
-                >
-                  Next
-                </Translate>
-              }
-            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <PaginatorNavLink
+                {...next}
+                subLabel={
+                  <Translate
+                    id="theme.docs.paginator.next"
+                    description="The label used to navigate to the next doc"
+                  >
+                    Next
+                  </Translate>
+                }
+              />
+            </div>
           )}
         </div>
       </div>

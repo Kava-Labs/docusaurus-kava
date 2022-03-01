@@ -6,12 +6,29 @@
  */
 import React from 'react';
 import Link from '@docusaurus/Link';
+import classes from './styles.module.css';
+import NextArrow from '@site/src/components/NextArrow';
+import PreviousArrow from '@site/src/components/PreviousArrow';
 export default function PaginatorNavLink(props) {
   const { permalink, title, subLabel } = props;
+  const { children } = subLabel.props;
+  const isNext = children === 'Next';
+  const flexDirection = isNext ? 'row-reverse' : '';
   return (
-    <Link to={permalink} style={{ color: 'var(--ifm-navbar-link-color)' }}>
-      {subLabel && <div className="pagination-nav__sublabel">{subLabel}</div>}
-      <h3 className="pagination-nav__label">{title}</h3>
+    <Link
+      to={permalink}
+      className={classes.navigatorLinkWrapper}
+      style={{
+        color: 'var(--ifm-navbar-link-color)',
+        display: 'flex',
+        flexDirection: flexDirection,
+      }}
+    >
+      {isNext ? <NextArrow /> : <PreviousArrow />}
+      <div>
+        {subLabel && <h6 style={{ fontWeight: 400 }}>{subLabel}</h6>}
+        <h4 style={{ fontWeight: 700 }}>{title}</h4>
+      </div>
     </Link>
   );
 }
