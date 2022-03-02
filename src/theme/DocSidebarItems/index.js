@@ -26,7 +26,7 @@ function DocSidebarItems({ items, ...props }) {
   return (
     <DocSidebarItemsExpandedStateProvider>
       {items.map((item, index) => (
-        <>
+        <div key={index}>
           <DocSidebarItem
             key={index} // sidebar is static, the index does not change
             item={item}
@@ -44,7 +44,7 @@ function DocSidebarItems({ items, ...props }) {
               />
             </div>
           )}
-        </>
+        </div>
       ))}
     </DocSidebarItemsExpandedStateProvider>
   );
