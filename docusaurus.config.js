@@ -54,7 +54,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://twitter.com/kava_labs',
+            href: 'https://twitter.com/kva_labs',
             label: 'Twitter',
             position: 'right',
           },
