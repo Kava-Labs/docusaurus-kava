@@ -13,7 +13,10 @@ export default function MobileSocialLinks() {
       <a className={classes.linkWrapper} href="https://discord.gg/JJYnuCx">
         <DiscordIcon />
       </a>
-      <a className={classes.linkWrapper} href="https://twitter.com/kava_labs">
+      <a
+        className={classes.linkWrapper}
+        href="https://twitter.com/kava_platform"
+      >
         <TwitterIcon />
       </a>
     </div>
