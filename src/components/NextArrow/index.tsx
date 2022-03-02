@@ -2,8 +2,6 @@ import React from 'react';
 import classes from './styles.module.css';
 
 export default function NextArrow() {
-  // const fillColor = 'var(--ifm-color-primary)';
-
   return (
     <div className={classes.arrowWrapper}>
       <svg
