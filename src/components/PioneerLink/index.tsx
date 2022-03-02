@@ -3,9 +3,10 @@ import classes from './styles.module.css';
 
 export default function PioneerLink() {
   return (
-    <div className={classes.linkWrapper}>
-      <hr className={classes.dividerColor} />
-      <a href="https://www.kava.io/pioneer">Join the Kava Network</a>
-    </div>
+    <a className={classes.linkWrapper} href="https://www.kava.io/pioneer">
+      <div className={classes.linkBox}>
+        <div className={classes.linkText}>Join the Kava Network</div>
+      </div>
+    </a>
   );
 }
