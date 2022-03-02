@@ -1,6 +1,11 @@
+.dividerColor {
+  border-color: #ff564f;
+}
+
 .linkWrapper {
-  text-align: center;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
   padding-bottom: 16px;
+  text-align: center;
+  text-decoration: none;
 }
