@@ -85,16 +85,17 @@ export function useColorModeToggle() {
     colorMode: { disableSwitch },
   } = useThemeConfig();
   const { isDarkTheme, setLightTheme, setDarkTheme } = useColorMode();
+
   const toggleTheme = () => {
     if (isDarkTheme) {
-      return setLightTheme();
+      setLightTheme();
     } else {
-      return setDarkTheme();
+      setDarkTheme();
     }
   };
-  const toggle = useCallback(
-    () => toggleTheme()[(setLightTheme, setDarkTheme)]
-  );
+
+  const toggle = () => toggleTheme();
+
   return {
     isDarkTheme,
     toggle,
