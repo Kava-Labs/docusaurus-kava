@@ -21,6 +21,7 @@ import { translate } from '@docusaurus/Translate';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import styles from './styles.module.css';
 import Link from '@docusaurus/core/lib/client/exports/Link';
+import PioneerLink from '@site/src/components/PioneerLink';
 
 function useShowAnnouncementBar() {
   const { isActive } = useAnnouncementBar();
@@ -91,15 +92,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }) {
               <DocSidebarItems items={sidebar} activePath={path} level={1} />
             </ul>
           </div>
-          <div className={styles.linkWrapper}>
-            <hr style={{ borderColor: '#FF564F' }} />
-            <a
-              style={{ textDecoration: 'none' }}
-              href="https://www.kava.io/pioneer"
-            >
-              Join the Kava Network
-            </a>
-          </div>
+          <PioneerLink />
         </div>
       </nav>
       {hideableSidebar && <HideableSidebarButton onClick={onCollapse} />}
