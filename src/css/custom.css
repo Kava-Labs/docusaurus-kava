@@ -40,6 +40,17 @@
   background-color: #2d2d2d;
 }
 
+[data-theme='dark'] .navbar {
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #7a8386;
+}
+
+.subtitleWrapper {
+  margin-left: 16px;
+  font-weight: 500;
+  color: #7a8386;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;

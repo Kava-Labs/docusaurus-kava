@@ -73,7 +73,7 @@ export default function Logo(props) {
               stroke="#B4B9BB"
             />
           </svg>
-          <h3 className={classes.subtitleWrapper}>Developer Docs</h3>
+          <h3 className="subtitleWrapper">Developer Docs</h3>
         </div>
       )}
     </>
