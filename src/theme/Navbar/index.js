@@ -23,7 +23,6 @@ import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
 import IconClose from '@theme/IconClose';
 import styles from './styles.module.css';
-import SearchBar from '@site/src/theme/SearchBar/SearchBar';
 import '@fontsource/inter';
 import Toggle from '@site/src/theme/Toggle';
 
@@ -219,8 +218,6 @@ export default function Navbar() {
   const activeDocPlugin = useActivePlugin();
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
   const items = useNavbarItems();
-  //  reimplement if we get to search
-  // const hasSearchNavbarItem = items.some((item) => item.type === 'search');
   const { leftItems, rightItems } = splitNavItemsByPosition(items);
   const windowSize = useWindowSize(); // Mobile sidebar not visible on hydration: can avoid SSR rendering
 
@@ -247,7 +244,6 @@ export default function Navbar() {
             <NavbarItem {...item} key={i} />
           ))}
         </div>
-        {windowSize === 'mobile' && <SearchBar />}
 
         <div className="navbar__items navbar__items--right">
           {(items?.length > 0 || activeDocPlugin) && (
@@ -274,7 +270,6 @@ export default function Navbar() {
               />
             </div>
           )}
-          {windowSize === 'desktop' && <SearchBar />}
         </div>
       </div>
 
