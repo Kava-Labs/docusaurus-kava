@@ -7,7 +7,7 @@
 /* You can override the default Infima variables here. */
 
 :root {
-  --ifm-color-primary: #e03a3a;
+  --ifm-color-primary: #ff564f;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -15,6 +15,11 @@
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
+  --ifm-font-color-secondary: #7a8386;
+}
+
+.theme-edit-this-page {
+  display: none;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -26,6 +31,29 @@
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
+}
+
+[data-theme='dark'] .menu {
+  background-color: #1e1e1e;
+}
+
+[data-theme='light'] .menu {
+  background-color: #faf9f8;
+}
+
+[data-theme='dark'] .docs-doc-page {
+  background-color: #2d2d2d;
+}
+
+[data-theme='dark'] .navbar {
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #7a8386;
+}
+
+.subtitleWrapper {
+  margin-left: 16px;
+  font-weight: 500;
+  color: #7a8386;
 }
 
 .docusaurus-highlight-code-line {
