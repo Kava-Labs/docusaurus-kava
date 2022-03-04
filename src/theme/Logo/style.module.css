@@ -2,8 +2,3 @@
   display: flex;
   align-items: flex-end;
 }
-
-.subtitleWrapper {
-  margin-left: 16px;
-  font-weight: 500;
-}
