@@ -7,15 +7,24 @@ import TwitterIcon from '@site/src/components/icons/TwitterIcon';
 export default function MobileSocialLinks() {
   return (
     <div className={classes.mobileSocialLinksWrapper}>
-      <a className={classes.linkWrapper} href="https://github.com/Kava-Labs">
+      <a
+        className={classes.linkWrapper}
+        href="https://github.com/Kava-Labs"
+        target="_blank"
+      >
         <GithubIcon />
       </a>
-      <a className={classes.linkWrapper} href="https://discord.gg/JJYnuCx">
+      <a
+        className={classes.linkWrapper}
+        href="https://discord.gg/JJYnuCx"
+        target="_blank"
+      >
         <DiscordIcon />
       </a>
       <a
         className={classes.linkWrapper}
         href="https://twitter.com/kava_platform"
+        target="_blank"
       >
         <TwitterIcon />
       </a>
