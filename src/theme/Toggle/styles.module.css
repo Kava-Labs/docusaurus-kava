@@ -6,8 +6,8 @@
  */
 
 .customToggleStyle {
-  border: none;
   background-color: inherit;
+  border: none;
   cursor: pointer;
 }
 
