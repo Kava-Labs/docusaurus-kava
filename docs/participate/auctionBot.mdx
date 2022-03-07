@@ -4,7 +4,6 @@ sidebar_position: 2
 
 # Run Auction Bot
 
-
 Client software for a running an auction bot on the kava blockchain. Currently tested against kava-testnet-8000.
 
 **Note** this is highly experimental software that requires a funded hot wallet to use. Running this software requires advanced technical skills and involves risks which are outside of the control of Kava Labs. Any use of this open source Apache 2.0 licensed software is done at your own risk and on a “AS IS” basis, without warranties or conditions of any kind, and any and all liability of Kava Labs for damages arising in connection to the software is excluded. Please exercise extreme caution!
@@ -58,7 +57,7 @@ Currently, this bot can be configured to participate in collateral auctions. Col
 }
 ```
 
-In this example auction, a lot of 10 BNB is being sold for a maximum bid of 94.5$ USDX.
+In this example auction, a lot of 10 BNB is being sold for a maximum bid of 94.50 USDX.
 
 Collateral auctions have two phases, forward and reverse. In the forward phase, bidders bid increasing amounts of USDX in exchange for the entire `lot`. Once the max bid is reached, the auction switches to the reverse phase. In the reverse phase, bidders bid decreasing lots of collateral (BNB in the example) they are willing to receive in exchange for `max_bid`. In the example, the `max_bid` is 94.5$ USDX for 10 BNB. At a current price of ~$16/BNB, the `max_bid` represents a considerable profit opportunity. Thus, a more competitive auction would expect to have `max_bid` reached and the final lot to be closer to 6 BNB, with the 4 remaining BNB returned to the original CDP holder.
 
