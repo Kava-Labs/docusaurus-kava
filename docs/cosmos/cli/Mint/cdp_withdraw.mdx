@@ -1,58 +1,33 @@
-<!--
-title: param-change
--->
-## kava tx gov submit-proposal param-change
+# Remove Collateral
 
-Submit a parameter change proposal
+Withdraw collateral from an existing cdp
 
-### Synopsis
-
-Submit a parameter proposal along with an initial deposit.
-The proposal details must be supplied via a JSON file. For values that contains
-objects, only non-empty fields will be updated.
-
-IMPORTANT: Currently parameter changes are evaluated but not validated, so it is
-very important that any "value" change is valid (ie. correct type and within bounds)
-for its respective parameter, eg. "MaxValidators" should be an integer and not a decimal.
-
-Proper vetting of a parameter change proposal should prevent this from happening
-(no deposits should occur during the governance process), but it should be noted
-regardless.
-
-Example:
+## Command
 
 ```
-$ kava tx gov submit-proposal param-change <path/to/proposal.json> --from=<key_or_address>
+kava tx cdp withdraw <owner-addr> <collateral> <collateral-type> <flags>
 ```
 
-Where proposal.json contains:
+Using `kava` call the `tx` subcommand followed by the module name which is`cdp`, then define the action which is `withdraw` and finally follow up with required arguments or flags.
+
+### Arguments
+
+| position | name            | expects                   |
+| -------- | --------------- | ------------------------- |
+| 1        | owner-addr      | kava address              |
+| 2        | collateral      | amount & name (no spaces) |
+| 3        | collateral-type | name                      |
+
+### Example
+
 ```
-{
-  "title": "Staking Param Change",
-  "description": "Update max validators",
-  "changes": [
-    {
-      "subspace": "staking",
-      "key": "MaxValidators",
-      "value": 105
-    }
-  ],
-  "deposit": [
-    {
-      "denom": "stake",
-      "amount": "10000"
-    }
-  ]
-}
-```
-```
-kava tx gov submit-proposal param-change [proposal-file] [flags]
+kava tx cdp withdraw kava15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw 10000000uatom atom-a --from myKeyName
 ```
 
 ### Options
 
 ```
-  -a, --account-number uint      The account number of the signing account (offline mode only)
+-a, --account-number uint      The account number of the signing account (offline mode only)
   -b, --broadcast-mode string    Transaction broadcasting mode (sync|async|block) (default "sync")
       --dry-run                  ignore the --gas flag and perform a simulation of a transaction, but don't broadcast it
       --fees string              Fees to pay along with transaction; eg: 10uatom
@@ -61,7 +36,7 @@ kava tx gov submit-proposal param-change [proposal-file] [flags]
       --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
       --gas-prices string        Gas prices to determine the transaction fee (e.g. 10uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible and the node operates offline)
-  -h, --help                     help for param-change
+  -h, --help                     help for withdraw
       --indent                   Add indent to JSON response
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --ledger                   Use a connected Ledger device
@@ -77,4 +52,3 @@ kava tx gov submit-proposal param-change [proposal-file] [flags]
 ```
       --chain-id string   Chain ID of tendermint node
 ```
-
