@@ -1,67 +1,25 @@
-<!--
-title: committee
--->
-## kava tx gov submit-proposal committee
+# Borrow
 
-Submit a governance proposal to change a committee.
+Borrow tokens from the hard protocol
 
-### Synopsis
-
-Submit a governance proposal to create, alter, or delete a committee.
-
-The proposal file must be the json encoded form of the proposal type you want to submit.
-For example, to create or update a committee:
-```
-{
-  "type": "kava/CommitteeChangeProposal",
-  "value": {
-    "title": "A Title",
-    "description": "A description of this proposal.",
-    "new_committee": {
-      "type": "kava/MemberCommittee",
-      "value": {
-        "base_committee": {
-          "id": "1",
-          "description": "The description of this committee.",
-          "members": [
-            "kava182k5kyx9sy4ap624gm9gukr3jfj7fdx8jzrdgq"
-          ],
-          "permissions": [
-            {
-              "type": "kava/SimpleParamChangePermission",
-              "value": {
-                "allowed_params": [
-                  {
-                    "subspace": "cdp",
-                    "key": "CircuitBreaker"
-                  }
-                ]
-              }
-            }
-          ],
-          "vote_threshold": "0.800000000000000000",
-          "proposal_duration": "604800000000000",
-          "tally_option": "FirstPastThePost"
-        }
-      }
-    }
-  }
-}
-```
-and to delete a committee:
-```
-{
-  "type": "kava/CommitteeDeleteProposal",
-  "value": {
-    "title": "A Title",
-    "description": "A description of this proposal.",
-    "committee_id": "1"
-  }
-}
-```
+## Command
 
 ```
-kava tx gov submit-proposal committee [proposal-file] [deposit] [flags]
+kava tx hard borrow <amount> <flags>
+```
+
+Using `kava` call the `tx` subcommand followed by the module name which is`hard`, then define the action which is `borrow` and finally follow up with required arguments or flags.
+
+### Arguments
+
+| position | name   | expects                   |
+| -------- | ------ | ------------------------- |
+| 1        | amount | amount & name (no spaces) |
+
+### Example
+
+```
+kava tx hard borrow 1000000000ukava --from <key>
 ```
 
 ### Options
@@ -76,7 +34,7 @@ kava tx gov submit-proposal committee [proposal-file] [deposit] [flags]
       --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
       --gas-prices string        Gas prices to determine the transaction fee (e.g. 10uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible and the node operates offline)
-  -h, --help                     help for committee
+  -h, --help                     help for borrow
       --indent                   Add indent to JSON response
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --ledger                   Use a connected Ledger device
@@ -85,6 +43,7 @@ kava tx gov submit-proposal committee [proposal-file] [deposit] [flags]
   -s, --sequence uint            The sequence number of the signing account (offline mode only)
       --trust-node               Trust connected full node (don't verify proofs for responses) (default true)
   -y, --yes                      Skip tx broadcasting prompt confirmation
+
 ```
 
 ### Options inherited from parent commands
@@ -92,4 +51,3 @@ kava tx gov submit-proposal committee [proposal-file] [deposit] [flags]
 ```
       --chain-id string   Chain ID of tendermint node
 ```
-

@@ -1,27 +1,32 @@
-# Withdraw
+# Swap Tokens
 
-Withdraw coins from hard
+Swap an exact amount of token a for token b
 
 ## Command
+
 ```
-kava tx hard withdraw <amount> <flags>
+kava tx swap swap-exact-for-tokens <exactCoinA> <coinB> <slippage> <deadline> <flags>
 ```
 
-Using ```kava``` call the ```tx``` subcommand followed by the module name which is```hard```, then define the action which is ```withdraw``` and finally follow up with required arguments or flags.
+Using `kava` call the `tx` subcommand followed by the module name which is`swap`, then define the action which is `swap-exact-for-tokens` and finally follow up with required arguments or flags.
 
 ### Arguments
-position|name|expects
-|--|--|--|
-1|amount| amount & name (no spaces)
 
-
+| position | name       | expects                         |
+| -------- | ---------- | ------------------------------- |
+| 1        | exactCoinA | exact amount & name (no spaces) |
+| 2        | coinB      | amount & name (no spaces)       |
+| 3        | slippage   | percentage float                |
+| 4        | deadline   | timestamp                       |
 
 ### Example
+
 ```
-kava tx hard withdraw 10000000bnb --from <key>
+kava tx swap swap-exact-for-tokens 1000000ukava 5000000usdx 0.01 1624224736 --from <key>
 ```
- 
+
 ### Options
+
 ```
 
   -a, --account-number uint      The account number of the signing account (offline mode only)
@@ -33,7 +38,7 @@ kava tx hard withdraw 10000000bnb --from <key>
       --gas-adjustment float     adjustment factor to be multiplied against the estimate returned by the tx simulation; if the gas limit is set manually this flag is ignored  (default 1)
       --gas-prices string        Gas prices to determine the transaction fee (e.g. 10uatom)
       --generate-only            Build an unsigned transaction and write it to STDOUT (when enabled, the local Keybase is not accessible and the node operates offline)
-  -h, --help                     help for withdraw
+  -h, --help                     help for swap-exact-for-tokens
       --indent                   Add indent to JSON response
       --keyring-backend string   Select keyring's backend (os|file|test) (default "os")
       --ledger                   Use a connected Ledger device
@@ -46,6 +51,7 @@ kava tx hard withdraw 10000000bnb --from <key>
 ```
 
 ### Options inherited from parent commands
+
 ```
 
       --chain-id string   Chain ID of tendermint node
