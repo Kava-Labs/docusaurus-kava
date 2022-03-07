@@ -26,3 +26,28 @@
 .linkWrapper:hover {
   text-decoration: none;
 }
+
+/* cut of point for default docusaurs theme is 996 between mobile and desktop  */
+@media screen and (min-width: 997px) {
+  .linkWrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .linkBox {
+    text-align: justify;
+  }
+
+  .linkText {
+    display: block;
+    border: 1px solid #ff564f;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    height: 80px;
+    margin-bottom: -8px;
+    padding-top: 25px;
+    padding-left: 55px;
+  }
+}
