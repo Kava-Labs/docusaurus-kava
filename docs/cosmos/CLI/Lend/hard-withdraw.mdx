@@ -3,25 +3,27 @@
 Withdraw coins from hard
 
 ## Command
+
 ```
 kava tx hard withdraw <amount> <flags>
 ```
 
-Using ```kava``` call the ```tx``` subcommand followed by the module name which is```hard```, then define the action which is ```withdraw``` and finally follow up with required arguments or flags.
+Using `kava` call the `tx` subcommand followed by the module name which is`hard`, then define the action which is `withdraw` and finally follow up with required arguments or flags.
 
 ### Arguments
-position|name|expects
-|--|--|--|
-1|amount| amount & name (no spaces)
 
-
+| position | name   | expects                   |
+| -------- | ------ | ------------------------- |
+| 1        | amount | amount & name (no spaces) |
 
 ### Example
+
 ```
 kava tx hard withdraw 10000000bnb --from <key>
 ```
- 
+
 ### Options
+
 ```
 
   -a, --account-number uint      The account number of the signing account (offline mode only)
@@ -46,6 +48,7 @@ kava tx hard withdraw 10000000bnb --from <key>
 ```
 
 ### Options inherited from parent commands
+
 ```
 
       --chain-id string   Chain ID of tendermint node
