@@ -2,10 +2,18 @@ import { useEffect } from 'react';
 
 export default function ExternalLink({ url }: { url: string }) {
   useEffect(() => {
-    // open url in new tab and go to the new tab
-    window.open(url, '__blank').focus();
-    // in the docs page go back to where the user was before clicking the link
-    // since this page is going to be empty
+    // create an a tag and simulate a click
+    // this works across all browsers
+    const a = document.createElement('a');
+    // display none
+    a.setAttribute('style', 'display: none;');
+    // add the url
+    a.setAttribute('href', url);
+    // ensure it opens in a new tab
+    a.setAttribute('target', '_blank');
+    //  click on the a tag
+    a.click();
+    // go back to previous page
     window.history.back();
   }, []);
 
