@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import DocSidebarItem from '@theme/DocSidebarItem';
 import {
   DocSidebarItemsExpandedStateProvider,
@@ -22,10 +22,45 @@ import '@fontsource/inter';
 function DocSidebarItems({ items, ...props }) {
   const windowSize = useWindowSize();
   const colorModeToggle = useColorModeToggle();
+  const [toc, setToc] = useState([]);
+
+  useEffect(() => {
+    const tableOfContent = [];
+    for (const item of items) {
+      if (item.label === 'Develop on Cosmos') {
+        tableOfContent.push(item);
+        const lastPushed = tableOfContent.length - 1;
+
+        if (
+          tableOfContent[lastPushed].items.filter((item) =>
+            item.href?.includes('https')
+          ).length === 0
+        ) {
+          tableOfContent[lastPushed].items = [
+            ...tableOfContent[lastPushed].items,
+            {
+              type: 'link',
+              label: 'REST API Spec',
+              href: 'https://swagger.kava.io/',
+            },
+            {
+              type: 'link',
+              label: 'Protocol Reference',
+              href: 'https://pkg.go.dev/github.com/kava-labs/kava',
+            },
+          ];
+        }
+      } else {
+        tableOfContent.push(item);
+      }
+    }
+
+    setToc(tableOfContent);
+  }, [items]);
 
   return (
     <DocSidebarItemsExpandedStateProvider>
-      {items.map((item, index) => (
+      {toc.map((item, index) => (
         <div key={index}>
           <DocSidebarItem
             key={index} // sidebar is static, the index does not change
