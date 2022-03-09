@@ -27,7 +27,7 @@ function DocSidebarItems({ items, ...props }) {
   useEffect(() => {
     const tableOfContent = [];
     for (const item of items) {
-      if (item.label === 'Develop on Cosmos') {
+      if (item.label === 'Develop on Cosmos Co-Chain') {
         tableOfContent.push(item);
         const lastPushed = tableOfContent.length - 1;
 
