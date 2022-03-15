@@ -7,8 +7,10 @@
 
 .customToggleStyle {
   background-color: inherit;
-  border: none;
   cursor: pointer;
+  border: none;
+  max-width: 39px;
+  min-width: 39px;
 }
 
 .toggle {
