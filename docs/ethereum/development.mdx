@@ -22,7 +22,7 @@ The `faucet` Ethereum account is funded with sufficient gas tokens to be used in
 alias dkava='docker exec -it generated_kavanode_1 kava'
 
 # Generate private key for named account 'faucet'
-dkava keys unsafe-export-eth-key faucet --keyring-backend test
+dkava keys export faucet --keyring-backend test
 ```
 
 ## Contract deployment

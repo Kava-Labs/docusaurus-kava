@@ -29,7 +29,7 @@ To access Kava EVM, you'll first need to add Kava's network configuration in Met
 - Network Name: Kava EVM Alphanet
 - New RPC URL: https://evm.evm-alpha.kava.io
 - Chain ID: 2221
-- Currency Symbol: KAVA 
+- Currency Symbol: KAVA
 - Explorer URL: https://explorer.evm-alpha.kava.io
 
 ### Mainnet
@@ -59,6 +59,6 @@ kvtool testnet bootstrap --kava.configTemplate evm
 alias dkava='docker exec -it generated_kavanode_1 kava'
 
 # Generate private key for named account 'validator'
-dkava keys unsafe-export-eth-key validator --keyring-backend test
+dkava keys export validator --keyring-backend test
 # 8A753652CB29472A01FAECF50EC1244C307B585466B2C52373539DA0100F3CED
 ```
