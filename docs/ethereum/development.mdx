@@ -12,16 +12,20 @@ Kava provides tools for easily setting up a local Kava development environment f
 kvtool enables developers to spin up a local Kava development environment. A dockerized local testnet with ethermint EVM can be created with:
 
 ```bash
-kvtool testnet bootstrap --kava.configTemplate evm
+kvtool testnet bootstrap --kava.configTemplate master
 ```
 
-The `faucet` Ethereum account is funded with sufficient gas tokens to be used in EVM transactions such as deploying smart contracts. Configuration file `hardhat.config.js` contains field `networks.local.accounts` which holds an array of private keys, including the private key for `faucet`. The private key was generated with:
+The `faucet` Ethereum account is funded with sufficient gas tokens to be used in
+EVM transactions such as deploying smart contracts. Configuration file
+`hardhat.config.js` contains field `networks.local.accounts` which holds an
+array of private keys, including the private key for `faucet`. The private key
+was exported with:
 
 ```bash
 # Add an alias to the dockerized kava blockchain
 alias dkava='docker exec -it generated_kavanode_1 kava'
 
-# Generate private key for named account 'faucet'
+# Export private key for named account 'faucet'
 dkava keys unsafe-export-eth-key faucet --keyring-backend test
 ```
 
