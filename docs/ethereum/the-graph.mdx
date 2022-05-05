@@ -1,0 +1,44 @@
+---
+sidebar_position: 4
+title: The Graph
+---
+
+A hosted [The Graph](https://thegraph.com/en/) node is available to use on Kava EVM.
+
+- JSON-RPC Admin (Deploy subgraphs): https://the-graph-admin.kava.io
+- GraphQL HTTP Server (Query subgraphs): https://the-graph.kava.io
+
+An example deployed subgraph is available for [V2 Uniswap](http://example.com).
+
+# Deploying Subgraphs
+
+### Install graph-cli
+
+https://github.com/graphprotocol/graph-cli#installation
+
+### Write your subgraph
+
+See https://thegraph.com/docs/en/developer/create-subgraph-hosted/.
+
+You can also use an example project like [v2-uniswap](https://github.com/Uniswap/v2-subgraph).
+
+### Upgrade the manifest
+
+Update the `network` properties in the `subgraph.yaml` manifest file.
+The network name for Kava EVM is `kava-evm`.
+
+### Create your subgraph
+
+```bash
+graph create <subgraph-name> --node https://the-graph-admin.evm-alpha.kava.io
+```
+
+### Deploy your subgraph
+
+```bash
+graph deploy <subgraph-name> --debug --ipfs https://api.thegraph.com/ipfs/ --node graph deploy Kava-Labs/v2-uniswap --debug --ipfs https://api.thegraph.com/ipfs/ --node http://127.0.0.1:8020
+```
+
+Note that you can either use your own ipfs node here or `https://api.thegraph.com/ipfs/`.
+
+Once deployed, your graph should now be deployed and accessible via the GraphQL Server. It can be access at `https://the-graph.kava.io/subgraphs/name/<subgraph-name>/graphql`.
