@@ -11,6 +11,28 @@ Kava EVM is compatible with MetaMask, the most popular browser wallet.
 
 To access Kava EVM, you'll first need to add Kava's network configuration in MetaMask:
 
+### Mainnet
+
+- Network Name: Kava EVM Co-Chain
+- New RPC URL: https://evm.kava.io
+- Chain ID: 2222
+- Currency Symbol: KAVA
+- Explorer URL: https://explorer.kava.io
+
+#### Verified Mainnet Contracts
+
+* Wrapped Kava (WKAVA): `0xc86c7C0eFbd6A49B35E8714C5f59D99De09A225b` ([view on explorer](https://explorer.kava.io/address/0xc86c7C0eFbd6A49B35E8714C5f59D99De09A225b/transactions))
+* Multicall `0x7ED7bBd8C454a1B0D9EdD939c45a81A03c20131C` ([view on explorer](https://explorer.kava.io/address/0x7ED7bBd8C454a1B0D9EdD939c45a81A03c20131C/transactions))
+* Multicall2 `0x30A62aA52Fa099C4B227869EB6aeaDEda054d121` ([view on explorer](https://explorer.kava.io/address/0x30A62aA52Fa099C4B227869EB6aeaDEda054d121/transactions))
+
+### Testnet
+
+- Network Name: Kava EVM Alphanet
+- New RPC URL: https://evm.evm-alpha.kava.io
+- Chain ID: 2221
+- Currency Symbol: KAVA 
+- Explorer URL: https://explorer.evm-alpha.kava.io
+
 ### Local
 
 - Network Name: Localhost 8545
@@ -23,21 +45,6 @@ To access Kava EVM, you'll first need to add Kava's network configuration in Met
   width="485"
   height="391"
 />
-
-### Testnet
-
-- Network Name: Kava EVM Alphanet
-- New RPC URL: https://evm.evm-alpha.kava.io
-- Chain ID: 2221
-- Currency Symbol: KAVA 
-- Explorer URL: https://explorer.evm-alpha.kava.io
-
-### Mainnet
-
-- Network Name: Kava EVM Co-Chain
-- New RPC URL: https://evm.kava.io
-- Chain ID: 2222
-- Currency Symbol: KAVA
 
 ## MetaMask account
 
@@ -58,7 +65,7 @@ kvtool testnet bootstrap --kava.configTemplate evm
 # Add an alias to the dockerized kava blockchain
 alias dkava='docker exec -it generated_kavanode_1 kava'
 
-# Generate private key for named account 'validator'
+# Export private key for named account 'validator'
 dkava keys unsafe-export-eth-key validator --keyring-backend test
 # 8A753652CB29472A01FAECF50EC1244C307B585466B2C52373539DA0100F3CED
 ```
