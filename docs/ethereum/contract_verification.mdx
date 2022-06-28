@@ -6,7 +6,7 @@ title: Contract Verification
 # Contract Verification
 
 Once you have deployed your smart contracts, you can verify them on the
-[explorer]. The following guides use [hardhat]
+[explorer]. The following guide uses [hardhat].
 
 ## Via Flattened Source Code
 
@@ -20,7 +20,8 @@ npx hardhat flatten path/to/your/contract.sol
    If your contract has constructor arguments, ensure that you provide them in
    the form. If you do not already have an ABI-encoded version of it, you can
    use this [online ABI encoding tool](https://abi.hashex.org/) to manually
-   create it.
+   create it. Additional information about ABI-Encoded constructor arguments can
+   be found on the [Blockscout documentation][blockscout-abi-constructor].
 
 ## Via Hardhat Verification Plugin
 
@@ -30,19 +31,21 @@ which is compatible with the Hardhat Etherscan plugin.
 
 1. [Install the Hardhat Etherscan plugin][hardhat-etherscan], ensuring
    that the version is `v3.1.0` or higher.
-2. Add the following configuration to your `hardhat.config.js` file:
+2. Ensure your `hardhat.config.js` file includes the following `etherscan`
+   configuration:
 
-```js
+```js title="hardhat.config.js"
 module.exports = {
   networks: {
     kava: {
       url: 'https://evm.kava.io',
     },
   },
+  // highlight-start
   etherscan: {
-    // The Kava explorer does not require an API key but some value is still
-    // required by the plugin. This can be any arbitrary string.
-    apiKey: 'meow',
+    apiKey: {
+      kava: "api key is not required by the Kava explorer, but can't be empty",
+    },
     customChains: [
       {
         network: 'kava',
@@ -54,10 +57,12 @@ module.exports = {
       },
     ],
   },
+  // highlight-end
 };
 ```
 
-3. Verify that the custom network is configured correctly.
+3. Verify that the custom network is configured correctly, by checking if kava
+   is listed in the supported custom networks.
 
 ```bash
 $ npx hardhat verify --list-networks
@@ -75,6 +80,25 @@ Custom networks added by you or by plugins:
 ╚═════════╧══════════╝
 ```
 
+4. Verify the contract with `npx hardhat verify`. This may take a few minutes.
+   The following is an example of verifying an WKAVA contract.
+
+```bash
+$ npx hardhat verify --network kava 0x52A87b0703C65a4C30657e7badc808855711CdEc
+
+Nothing to compile
+Generating typings for: 0 artifacts in dir: typechain-types for target: ethers-v5
+Successfully generated 3 typings!
+Successfully generated 3 typings for external artifacts!
+Compiling 1 file with 0.8.9
+Successfully submitted source code for contract
+contracts/WKAVA.sol:WKAVA at 0x52A87b0703C65a4C30657e7badc808855711CdEc
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract WKAVA on Etherscan.
+https://explorer.kava.io/address/0x52A87b0703C65a4C30657e7badc808855711CdEc#code
+```
+
 ## Troubleshooting
 
 Here are some common errors and things to look out for when verifying your
@@ -82,7 +106,8 @@ contracts.
 
 ### `Bytecode does not match, please try again.`
 
-Ensure the following options are the exact same as what you deployed with:
+Ensure the following options are the exact same as what you deployed with, then
+try again.
 
 - Compiler version
 - Optimization runs
@@ -94,11 +119,18 @@ Flattening your contracts may sometimes merge multiple dependent contracts also
 with SPX identifiers (e.g. `// SPDX-License-Identifier: GPL-3.0`).
 
 Remove all SPDX comments except one in your flattened file and try verifying
-again. Alternatively, use the hardhat verification plugin or standard input
-JSON which can preserve license identifers for individual contract dependencies.
+again. Alternatively, use the hardhat verification plugin to preserve license
+identifiers.
+
+## Resources
+
+- [Hardhat Verification Plugin][hardhat-etherscan]
+- [BlockScout Documentation][blockscout-docs]
 
 [explorer]: https://explorer.kava.io
 [hardhat]: https://hardhat.org/
 [hardhat-etherscan]: https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
 [blockscout]: https://github.com/blockscout/blockscout
+[blockscout-docs]: https://docs.blockscout.com/
+[blockscout-abi-constructor]: https://docs.blockscout.com/for-users/abi-encoded-constructor-arguments
 [blockscout-verify]: https://docs.blockscout.com/for-users/verifying-a-smart-contract
