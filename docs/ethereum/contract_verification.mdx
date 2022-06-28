@@ -36,25 +36,24 @@ which is compatible with the Hardhat Etherscan plugin.
 module.exports = {
   networks: {
     kava: {
-      url: "http://127.0.0.1:8545",
-      ...
+      url: 'https://evm.kava.io',
     },
   },
   etherscan: {
     // The Kava explorer does not require an API key but some value is still
     // required by the plugin. This can be any arbitrary string.
-    apiKey: "meow",
+    apiKey: 'meow',
     customChains: [
       {
-        network: "kava",
+        network: 'kava',
         chainId: 2222,
         urls: {
-          apiURL: "https://explorer.kava.io/api",
-          browserURL: "https://explorer.kava.io"
-        }
-      }
-    ]
-  }
+          apiURL: 'https://explorer.kava.io/api',
+          browserURL: 'https://explorer.kava.io',
+        },
+      },
+    ],
+  },
 };
 ```
 
