@@ -1,0 +1,79 @@
+---
+sidebar_position: 4
+title: Contract Verification
+---
+
+# Contract Verification
+
+Once you have deployed your smart contracts, you can verify them on the
+[explorer]. The following guides use [hardhat]
+
+## Via Flattened Source Code
+
+1. Use the following command to get a flattened source code of your smart contract:
+
+```bash
+npx hardhat flatten path/to/your/contract.sol
+```
+
+2. [Find your deployed contract on the Kava explorer and follow the steps to verify][blockscout-verify]
+
+## Via Hardhat Verification Plugin
+
+You can also verify directly from your Hardhat development environment. This
+requires the [`hardhat-etherscan`][hardhat-etherscan] plugin. The Kava explorer uses [BlockScout]
+which is compatible with the Hardhat Etherscan plugin.
+
+1. [Install the Hardhat Etherscan plugin][hardhat-etherscan], ensuring
+   that the version is `v3.1.0` or higher.
+2. Add the following configuration to your `hardhat.config.js` file:
+
+```js
+module.exports = {
+  networks: {
+    kava: {
+      url: "http://127.0.0.1:8545",
+      ...
+    },
+  },
+  etherscan: {
+    // The Kava explorer does not require an API key but some value is still
+    // required by the plugin. This can be any arbitrary string.
+    apiKey: "meow",
+    customChains: [
+      {
+        network: "kava",
+        chainId: 2222,
+        urls: {
+          apiURL: "https://explorer.kava.io/api",
+          browserURL: "https://explorer.kava.io"
+        }
+      }
+    ]
+  }
+};
+```
+
+3. Verify that the custom network is configured correctly.
+
+```bash
+$ npx hardhat verify --list-networks
+
+Networks supported by hardhat-etherscan:
+
+...
+
+Custom networks added by you or by plugins:
+
+╔═════════╤══════════╗
+║ network │ chain id ║
+╟─────────┼──────────╢
+║ kava    │ 2222     ║
+╚═════════╧══════════╝
+```
+
+[explorer]: https://explorer.kava.io
+[hardhat]: https://hardhat.org/
+[hardhat-etherscan]: https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
+[blockscout]: https://github.com/blockscout/blockscout
+[blockscout-verify]: https://docs.blockscout.com/for-users/verifying-a-smart-contract
