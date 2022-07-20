@@ -5,7 +5,7 @@ export default function PioneerLink() {
   return (
     <a
       className={classes.linkWrapper}
-      href="https://www.kava.io/pioneer"
+      href="https://www.kava.io/rise"
       target="_blank"
     >
       <div className={classes.linkBox}>
