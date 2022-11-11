@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Kava',
   tagline: 'Kava',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://docs.kava.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
