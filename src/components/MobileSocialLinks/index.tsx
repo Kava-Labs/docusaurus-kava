@@ -23,7 +23,7 @@ export default function MobileSocialLinks() {
       </a>
       <a
         className={classes.linkWrapper}
-        href="https://twitter.com/kava_platform"
+        href="https://twitter.com/KAVA_CHAIN"
         target="_blank"
       >
         <TwitterIcon />
