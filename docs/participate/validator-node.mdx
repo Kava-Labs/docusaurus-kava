@@ -11,7 +11,7 @@ This is an updated guide on setting up a mainnet validator. Note that this is a 
 
 ### Prerequisites
 
-You should select an all-purpose server with at least 8GB of RAM, good connectivity, and a solid state drive with sufficient disk space. Storage requirements are discussed further in the section below. In addition, you’ll need to open **port 26656** to connect to the Kava peer-to-peer network. As the usage of the blockchain grows, the server requirements may increase as well, so you should have a plan for updating your server as well.
+You should select an all-purpose server with at least 32GB of RAM, good connectivity, and a solid state drive with sufficient disk space. Storage requirements are discussed further in the section below. In addition, you’ll need to open **port 26656** to connect to the Kava peer-to-peer network. As the usage of the blockchain grows, the server requirements may increase as well, so you should have a plan for updating your server as well.
 
 ### Storage
 
@@ -23,7 +23,7 @@ The monthly storage requirements for a node are as follows. These are estimated 
 
 ## Install Go
 
-Kava is built using Go and requires Go version 1.17+. In this example, you will be installing Go on a fresh install of ubuntu 20.04.
+Kava is built using Go and requires Go version 1.18. In this example, you will be installing Go on a fresh install of ubuntu 20.04.
 
 ```bash
 # Update ubuntu
@@ -37,8 +37,8 @@ sudo apt install build-essential jq -y
 sudo apt install git
 
 # Install go
-wget https://dl.google.com/go/go1.17.11.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
-sudo tar -xvf go1.17.11.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.18.1.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
+sudo tar -xvf go1.18.1.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 # Updates environmental variables to include go
@@ -55,17 +55,17 @@ To verify that Go is installed:
 
 ```bash
 go version
-# Should return go version go1.17.11 linux/amd64
+# Should return go version go1.18.1 linux/amd64
 ```
 
 ## Install Kava
 
-Install Kava using `git clone`. Note that version 0.17.5 is the correct version for mainnet.
+Install Kava using `git clone`. Note that version 0.21.0 is the correct version for mainnet.
 
 ```bash
 git clone https://github.com/kava-labs/kava
 cd kava
-git checkout v0.17.5
+git checkout v0.21.0
 make install
 ```
 
@@ -75,54 +75,19 @@ To verify that kava is installed:
 kava version --long
 # name: kava
 # server_name: kava
-# version: 0.17.5
-# commit: 5020a6a448d4d8d666de64dfd220da0f47dbcacf
-
+# version: 0.21.0
+# commit: 357ec96338a4c4fa4624560f1182bf85cc068009
 # build_tags: netgo,ledger
-# go: go version go1.17.11 linux/amd64
+# go: go version go1.18.1 darwin/amd64
 ```
 
 ## Configuring Your Node
 
-Next, download the correct genesis file and sync your node with the Kava mainnet. To download the genesis file:
+Next, download the correct version of the kava node data and sync a node:
 
-```bash
-# First, initialize kava. Replace <name> with the public name of your node
-kava init --chain-id kava_2222-10 <name>
-# Download the genesis file
-wget https://kava-genesis-files.s3.us-east-1.amazonaws.com/kava_2222-10/genesis.json -O ~/.kava/config/genesis.json
-# Verify genesis hash
-jq -S -c -M '' $HOME/.kava/config/genesis.json | shasum -a 256
-# 3bc9829faf3beae2892ff1dfb7158f41a3f0cff303b4798777a559250a4dc815
-```
+https://quicksync.io/networks/kava.html
 
-Next, adjust some configurations. To open the config file:
-
-```bash
-vim $HOME/.kava/config/config.toml
-```
-
-At line 212, add [seeds](https://docs.google.com/spreadsheets/d/1s3LXLPFJazzdmwKdRv909pe_-ZV_Xbt2uCCNrhoOyIE/edit#gid=0). These are used to connect to the peer-to-peer network:
-
-At line 215, add some [persistent peers](https://docs.google.com/spreadsheets/d/1s3LXLPFJazzdmwKdRv909pe_-ZV_Xbt2uCCNrhoOyIE/edit#gid=0), which help maintain a connection to the peer-to-peer network
-
-Next, chose how much historical state you want to store. To open the application config file:
-
-```bash
-vim $HOME/.kava/config/app.toml
-```
-
-In this file, choose between `default`, `nothing`, and `everything`. To reduce hard drive storage, choose `everything` or `default`. To run an archival node, chose `nothing`.
-
-```bash
-pruning = "default"
-```
-
-In the same file, you will want to set minimum gas prices — setting a minimum prevents spam transactions:
-
-```bash
-minimum-gas-prices = "0.001ukava;1000000000akava"
-```
+Note that the current mainnet network is `kava_2222-10`. 
 
 ### Syncing Your Node
 
@@ -176,7 +141,7 @@ This will give output like:
 }
 ```
 
-The main thing to watch is that the block height is increasing. Once you are caught up with the chain, `catching_up` will become false. At that point, you can start using your node to create a validator. If you need to sync using a snapshot, please use https://kava.quicksync.io/
+The main thing to watch is that the block height is increasing. Once you are caught up with the chain, `catching_up` will become false. At that point, you can start using your node to create a validator. 
 
 To check the logs of the node:
 
