@@ -4,34 +4,22 @@ sidebar_position: 1
 
 # Getting Started
 
-In order for developers to start building modules, they must install the following tools:
+This document will help you get a kava network up and running locally on your machine. It uses a CLI tool call `kvtool` that manages the configuration and initial setup of a network. The tool uses docker containers to run a Kava network with some optional configuration.
 
-1. [Go 1.6 or higher](https://golang.org/doc/install)
-2. [Docker](https://docs.docker.com/get-docker/)
+You must have the following tools:
 
-### Go Programming Language
+1. [Go 1.18](https://golang.org/doc/install) - used to build & install `kvtool`
+2. [Docker](https://docs.docker.com/get-docker/) - used by `kvtool` to run local networks.
 
-Go is a language developed and used by some of the largest companies in the world for server/networking applications. Go is used to develop modules and provides optimum performance and flexibility to blockchain developers.
+## Ensure Go is setup in your PATH
 
-[A Tour Of Go](https://tour.golang.org/welcome/1)
-
-### Docker
-
-Docker is a software containerization tool used to spin up and shut down Kava nodes and allows software portability between different operating systems & environments. It is also used to spin up multiple Kava nodes locally and handles basic networking between them with `docker compose`.
-
-[Docker Overview](https://docs.docker.com/get-started/overview/)
-
-### Set Up bash_profile
-
-Once Go & Docker are installed, update your bash_profile to include the go path and an alias command for one of the tools we will use to handle Kava node interactions
+Once Go & Docker are installed, update your bash_profile to include the go path.
 
 ```
 export PATH=/usr/local/go/bin:$PATH
 export PATH=$HOME/go/bin:$PATH
 export GOPATH=$HOME/go
 export GO111MODULE=on
-
-alias dkvcli='docker exec -it generated_kavanode_1 kvcli'
 ```
 
 Make sure to source your bash profile or restart it for the changes to take place.
@@ -52,45 +40,147 @@ Now that you have set up all the tools & repositories in your local machine its 
 - Open a terminal and change into the `kvtool` directory.
 - Ensure Docker is running.
 - Run `make install` in your terminal which will install `kvtool` in your machine.
-- Ensure Docker is running.
-- Run `kvtool testnet bootstrap` this command will build against the master branch from the kava project, initialize the Docker containers and finally starts a local chain.
+- Run `kvtool testnet bootstrap`. By default, this command will initialize a docker container running the code of the current master branch of `kava`.
 
-Now that you have a local chain running, you can start utilizing the `dkvcli` that we set up an alias for. If for whatever reason `dkvcli` doesn't work, you can try the following:
+Kava is now running on your local machine! The endpoints are publically exposed to your localhost:
 
-- Open a terminal and change into the `kvtool` directory.
-- In the `kvtool` directory there should be a directory named `full_configs` change into it.
-- Once at `full_configs` directory change into `generated` directory.
-- Once you are at `generated` run the following command `docker-compose exec kavanode bash`.
+- RPC: http://localhost:26657
+- REST: http://localhost:1317
+- GRPC: http://localhost:9090
+- GRPC Websocket: http://localhost:9091
+- EVM JSON-RPC: http://localhost:8545
+- EVM Websocket: http://localhost:8546
 
-This should open up a bash terminal inside a docker container that will give you access to the `kvcli` command line interface. You should see something similar to the snippet below after typing `kvcli help`:
+To interact with the network you can use `kava` CLI from your local machine by setting the `--node` flag:
 
 ```
-bash-5.0# kvcli
-Command line interface for interacting with kvd
+kava --node http://localhost:26657 status
+```
+
+However, it is likely more convenient to run the `kava` CLI directly in the container. This ensures you are running a compatible version of the CLI and gives you access to the accounts configured in the local chain. To do this, add the following alias:
+
+```bash
+alias dkava='docker exec -it generated_kavanode_1 kava'
+```
+
+Note that for some architectures or docker versions, the containers are generated with hyphens (`-`) instead of underscores (`_`).
+
+This alias execs into the container and runs `kava`. From there you have access to accounts.
+
+**NOTE**: Before Kava 9 (`v0.16`), the `kava` binary was two separate binaries. One for running the chain (`kvd`) and a separate one for the cli (`kvcli`). If running older versions, you will need to use `kvcli` instead of `kava`.
+
+**Example**:
+Create a new account & fund it:
+
+```
+$ dkava keys add my-test-account
+
+- name: my-test-account
+  type: local
+  address: kava17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AnaP5cFfUDcK4jOGTLPCUPGqtijViYmCAd7XRg7XTQib"}'
+  mnemonic: ""
+
+
+**Important** write this mnemonic phrase in a safe place.
+It is the only way to recover your account if you ever forget your password.
+
+sign sausage monster group rain kite stage cat brush arm result chalk join hamster cup mass chuckle swing inflict april salmon deposit habit grid
+
+$ dkava tx bank send whale kava17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl 1000000000ukava --gas-prices 0.01ukava -y
+```
+
+The above creates a new randomly generated account (`kava17fuj33p6y472j3kplsjdz966xlw6cdhwqzl8rl`) and funds it from the `whale` account.
+
+For a list of available accounts see [accounts.json](https://github.com/Kava-Labs/kvtool/blob/master/config/common/addresses.json), or the [keyring directory](https://github.com/Kava-Labs/kvtool/tree/master/config/templates/kava/master/initstate/.kava/keyring-test).
+
+---
+
+Additionally, you can just exec into a shell in the container. Kvtool manages everything with docker-compose and it exposes a command that will run docker-compose in the required location. The running configuration is in `kvtool/full_configs/docker-compose.yaml`.
+
+```
+$ kvtool testnet dc -- exec kavanode bash
+
+bash-5.1# kava --help
+Daemon and CLI for the Kava blockchain.
 
 Usage:
-  kvcli [command]
+  kava [command]
 
 Available Commands:
-  status      Query remote node for status
-  config      Create or query an application CLI configuration file
-  query       Querying subcommands
-  tx          Transactions subcommands
-
-  rest-server Start LCD (light-client daemon), a local REST server
-
-  keys        Add or view local private keys
-
-  version     Print the app version
-  help        Help about any command
+  add-genesis-account Add a genesis account to genesis.json
+  assert-invariants   Validates that the input genesis file is valid and invariants pass
+  collect-gentxs      Collect genesis txs and output a genesis.json file
+  config              Create or query an application CLI configuration file
+  debug               Tool for helping with debugging your application
+  export              Export state to JSON
+  gentx               Generate a genesis tx carrying a self delegation
+  help                Help about any command
+  init                Initialize private validator, p2p, genesis, and application configuration files
+  keys                Manage your application's keys
+  migrate             Migrate genesis from v0.17 to v0.18
+  query               Querying subcommands
+  start               Run the full node
+  status              Query remote node for status
+  tendermint          Tendermint subcommands
+  tx                  Transactions subcommands
+  validate-genesis    validates the genesis file at the default location or at the location passed as an arg
+  version             Print the application binary version information
 
 Flags:
-      --chain-id string   Chain ID of tendermint node
-  -e, --encoding string   Binary encoding (hex|b64|btc) (default "hex")
-  -h, --help              help for kvcli
-      --home string       directory for config and data (default "/root/.kvcli")
-  -o, --output string     Output format (text|json) (default "text")
-      --trace             print out full stack trace on errors
+  -h, --help                help for kava
+      --home string         directory for config and data (default "/root/.kava")
+      --log_format string   The logging format (json|plain) (default "plain")
+      --log_level string    The logging level (trace|debug|info|warn|error|fatal|panic) (default "info")
+      --trace               print out full stack trace on errors
 
-Use "kvcli [command] --help" for more information about a command.
+Use "kava [command] --help" for more information about a command.
 ```
+
+### Config Templates
+
+Config templates control the initial genesis file used to start the network and contain the . They also include all the account keys for accounts configured in the docker container.
+
+The available config templates can be found in [`config/templates/kava/`](https://github.com/Kava-Labs/kvtool/tree/master/config/templates/kava).
+
+By default, `kvtool` runs with the `master` config template which defaults to the `master` docker tag which is autodeployed whenever a commit is made to the master branch of `kava`. Occasionally, the configuration may become out of sync with what is currently on the master branch of kava. In these cases, it can be useful to use a template that uses a fixed docker tag with a working configuration:
+
+For example, running a network with v0.21 of `kava`:
+
+```
+$ kvtool testnet bootstrap --kava.configTemplate v0.21
+```
+
+This won't be subject to changes breaking changes of `kava` that have yet to be updated in `kvtool`'s master template.
+
+### Docker Image Tag
+
+Additionally, all kava confiug templates support overriding the docker image tag. A full list of available tags is available on [Docker Hub](https://hub.docker.com/r/kava/kava/tags).
+
+You can override the tag by setting the `KAVA_TAG` environment variable. For instance running the master template with a fixed kava version of `v0.21.0`:
+
+```
+KAVA_TAG=v0.21.0 kvtool testnet bootstrap
+```
+
+Note that at the time you're reading this, the master template's genesis and configuration may not be compatible with kava version v0.21.0.
+
+This is also useful for the development of `kava` itself. You can build a docker image, give it a tag like `kava/kava:TAG_HERE`, and then run a local network with the built image. There is a shortcut for this in the `kava` repo.
+
+```bash
+cd kava
+# the docker-build command builds the docker image and tags it `kava/kava:local`
+make docker-build
+# then you can run a network with the image you created
+KAVA_TAG=local kvtool testnet bootstrap
+```
+
+## But wait! There's more!
+
+`kvtool` has a lot more functionality than simply running a single local kava network. Be sure to use its `--help` command and check out the repo's [README.md](https://github.com/Kava-Labs/kvtool/blob/master/README.md).
+
+It supports things like running two networks with an open IBC channel, chain upgrades, and more.
+
+Be sure to check out our guide on [developing for Kava's EVM](../ethereum/development).
+
+**Disclaimer**: `kvtool` is beta software. 😊 Some of its features may not always work as expected. Generally, the commands used in this guide are frequently used enough to be reliable. If you run into any problems, please reach out to us on [Discord](https://discord.com/invite/kQzh3Uv) or by [opening an issue](https://github.com/Kava-Labs/kvtool/issues/new).
