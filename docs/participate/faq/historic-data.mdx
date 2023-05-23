@@ -3,21 +3,27 @@
 Kava Labs runs free, public archive nodes of all historic Kava versions.
 These endpoints are documented below with the relevant time frames for the data they contain:
 
-| Major Version | Kava Version | Chain ID     | Final Block Height | Start Date | End Date   | Archive Endpoints                                                                                                        |
-| ------------- | ------------ | ------------ | ------------------ | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Kava 2        | v0.3.5       | kava-2       | 2598890            | 2019-11-15 | 2020-06-10 | [API](https://api.kava-2.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-2.archives.kava.io/status)               |
-| Kava 3        | v0.10.0      | kava-3       | 1552962            | 2020-06-10 | 2020-10-15 | [API](https://api.kava-3.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-3.archives.kava.io/status)               |
-| Kava 4        | v0.12.2      | kava-4       | 1267330            | 2020-10-15 | 2021-03-04 | [API](https://api.kava-4.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-4.archives.kava.io/status)               |
-| Kava 6        | v0.12.4      | kava-6       | 334944             | 2021-03-05 | 2021-04-08 | [API](https://api.kava-6.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-6.archives.kava.io/status)               |
-| Kava 7        | v0.14.2      | kava-7       | 1878508            | 2021-04-08 | 2021-08-30 | [API](https://api.kava-7.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-7.archives.kava.io/status)               |
-| Kava 8        | v0.15.2      | kava-8       | 1803249            | 2021-08-31 | 2022-01-19 | [API](https://api.kava-8.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-8.archives.kava.io/status)               |
-| Kava 9        | v0.16.1      | kava-9       | 1610470            | 2022-01-19 | 2022-05-25 | [API](https://api.kava-9.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-9.archives.kava.io/status)               |
-| Kava 10       | v0.18.2      | kava_2222-10 | 2098400            | 2022-05-25 | 2022-10-26 | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
-| Kava 11       | v0.19.2      | kava_2222-10 |                    | 2022-10-26 | present    | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
+| Major Version | Kava Version | Chain ID     | Final Block Height   | Start Date | End Date   | Archive Endpoints                                                                                                        |
+| ------------- | ------------ | ------------ | -------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Kava 2        | v0.3.5       | kava-2       | 2598890<sup>\*</sup> | 2019-11-15 | 2020-06-10 | [API](https://api.kava-2.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-2.archives.kava.io/status)               |
+| Kava 3        | v0.10.0      | kava-3       | 1552962<sup>\*</sup> | 2020-06-10 | 2020-10-15 | [API](https://api.kava-3.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-3.archives.kava.io/status)               |
+| Kava 4        | v0.12.2      | kava-4       | 1267330<sup>\*</sup> | 2020-10-15 | 2021-03-04 | [API](https://api.kava-4.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-4.archives.kava.io/status)               |
+| Kava 6        | v0.12.4      | kava-6       | 334944<sup>\*</sup>  | 2021-03-05 | 2021-04-08 | [API](https://api.kava-6.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-6.archives.kava.io/status)               |
+| Kava 7        | v0.14.2      | kava-7       | 1878508<sup>\*</sup> | 2021-04-08 | 2021-08-30 | [API](https://api.kava-7.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-7.archives.kava.io/status)               |
+| Kava 8        | v0.15.2      | kava-8       | 1803249<sup>\*</sup> | 2021-08-31 | 2022-01-19 | [API](https://api.kava-8.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-8.archives.kava.io/status)               |
+| Kava 9        | v0.16.1      | kava-9       | 1610470<sup>\*</sup> | 2022-01-19 | 2022-05-25 | [API](https://api.kava-9.archives.kava.io/node_info)<br/>[RPC](https://rpc.kava-9.archives.kava.io/status)               |
+| Kava 10       | v0.18.2      | kava_2222-10 | 2098400              | 2022-05-25 | 2022-10-26 | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
+| Kava 11       | v0.19.2      | kava_2222-10 | 3607200              | 2022-10-26 | 2023-02-26 | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
+| Kava 12       | v0.21.1      | kava_2222-10 | 4832500              | 2023-02-26 | 2023-05-17 | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
+| Kava 13       | v0.23.0      | kava_2222-10 |                      | 2023-05-17 | present    | [API](https://api.data.kava.io/node_info)<br/>[RPC](https://rpc.data.kava.io/status)<br/>[EVM](https://evm.data.kava.io) |
+
+<sup>*</sup> <i>block height was reset to 0 after these upgrades</i>
+<br />
+<br />
 
 As of the Kava 10 release, all upgrades are done as in-place software upgrades.
 The chain id no longer updates and the block height is never reset to 0, as was the case with all
 upgrades prior to Kava 10. Historical data for all upgrades since Kava 10 are available on the
-mainnet data node endpoints.
+mainnet data node endpoints. Some data may need to be queried with the historic verison of the Kava CLI.
 
 Note that the Kava 5 upgrade was reverted. Those data are also available: [API](https://api.kava-5.archives.kava.io/node_info) & [RPC](https://rpc.kava-5.archives.kava.io/status)

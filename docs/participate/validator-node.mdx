@@ -37,8 +37,8 @@ sudo apt install build-essential jq -y
 sudo apt install git
 
 # Install go
-wget https://dl.google.com/go/go1.18.1.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
-sudo tar -xvf go1.18.1.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.20.linux-amd64.tar.gz (or latest version at https://golang.org/dl/)
+sudo tar -xvf go1.20.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 # Updates environmental variables to include go
@@ -55,17 +55,17 @@ To verify that Go is installed:
 
 ```bash
 go version
-# Should return go version go1.18.1 linux/amd64
+# Should return go version go1.20 linux/amd64
 ```
 
 ## Install Kava
 
-Install Kava using `git clone`. Note that version 0.21.0 is the correct version for mainnet.
+Install Kava using `git clone`. Note that version 0.23.0 is the correct version for mainnet.
 
 ```bash
 git clone https://github.com/kava-labs/kava
 cd kava
-git checkout v0.21.0
+git checkout v0.23.0
 make install
 ```
 
@@ -73,12 +73,13 @@ To verify that kava is installed:
 
 ```bash
 kava version --long
+# build_tags: netgo,ledger
+# commit: 1fed82f3c5c054900c4a992ad3be47c63f332d96
+# cosmos_sdk_version: v0.46.11
+# go: go version go1.20 darwin/arm64
 # name: kava
 # server_name: kava
-# version: 0.21.0
-# commit: 357ec96338a4c4fa4624560f1182bf85cc068009
-# build_tags: netgo,ledger
-# go: go version go1.18.1 darwin/amd64
+# version: 0.23.0
 ```
 
 ## Configuring Your Node
@@ -87,7 +88,7 @@ Next, download the correct version of the kava node data and sync a node:
 
 https://quicksync.io/networks/kava.html
 
-Note that the current mainnet network is `kava_2222-10`. 
+Note that the current mainnet network is `kava_2222-10`.
 
 ### Syncing Your Node
 
@@ -141,7 +142,7 @@ This will give output like:
 }
 ```
 
-The main thing to watch is that the block height is increasing. Once you are caught up with the chain, `catching_up` will become false. At that point, you can start using your node to create a validator. 
+The main thing to watch is that the block height is increasing. Once you are caught up with the chain, `catching_up` will become false. At that point, you can start using your node to create a validator.
 
 To check the logs of the node:
 
