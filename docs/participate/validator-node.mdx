@@ -11,7 +11,7 @@ This is an updated guide on setting up a mainnet validator. Note that this is a 
 
 ### Prerequisites
 
-You should select an all-purpose server with at least 32GB of RAM, good connectivity, and a solid state drive with sufficient disk space. Storage requirements are discussed further in the section below. In addition, you’ll need to open **port 26656** to connect to the Kava peer-to-peer network. As the usage of the blockchain grows, the server requirements may increase as well, so you should have a plan for updating your server as well.
+You should select an all-purpose server with at least 64GB of RAM, good connectivity, and a solid state drive with sufficient disk space. Storage requirements are discussed further in the section below. In addition, you’ll need to open **port 26656** to connect to the Kava peer-to-peer network. As the usage of the blockchain grows, the server requirements may increase as well, so you should have a plan for updating your server as well.
 
 ### Storage
 
@@ -23,7 +23,7 @@ The monthly storage requirements for a node are as follows. These are estimated 
 
 ## Install Go
 
-Kava is built using Go and requires Go version 1.18. In this example, you will be installing Go on a fresh install of ubuntu 20.04.
+Kava is built using Go and requires Go version 1.20. In this example, you will be installing Go on a fresh install of ubuntu 20.04.
 
 ```bash
 # Update ubuntu
@@ -95,7 +95,7 @@ Note that the current mainnet network is `kava_2222-10`.
 To sync your node, you will use systemd, which manages the Kava daemon and automatically restarts it in case of failure. To use systemd, you will create a service file. Be sure to replace `<your_user>` with the user on your server:
 
 ```bash
-sudo tee /etc/systemd/system/kavad.service > /dev/null <<'EOF'
+sudo tee /etc/systemd/system/kava.service > /dev/null <<'EOF'
 [Unit]
 Description=Kava daemon
 After=network-online.target
@@ -116,8 +116,8 @@ To start syncing:
 
 ```bash
 # Start the node
-sudo systemctl enable kavad
-sudo systemctl start kavad
+sudo systemctl enable kava
+sudo systemctl start kava
 ```
 
 To check on the status of syncing:
@@ -147,7 +147,7 @@ The main thing to watch is that the block height is increasing. Once you are cau
 To check the logs of the node:
 
 ```bash
-sudo journalctl -u kavad -f
+sudo journalctl -u kava -f
 ```
 
 ## Creating a Validator
