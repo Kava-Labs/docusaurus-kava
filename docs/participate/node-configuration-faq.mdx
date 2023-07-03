@@ -22,3 +22,19 @@ A. [Here](https://polkachu.com/live_peers/kava)
 Q. What should be the value of `minimum-gas-prices` in app.toml
 
 A. `0.001ukava;1000000000akava`
+
+Q. Where can I get a complete example of standard settings for `app.toml`, `config.toml`, and `client.toml` node configuration files?
+
+A. [app.toml](../../static/files/kava.service/
+app.toml), [config.toml](../../static/files/kava.service/
+config.toml), [client.toml](../../static/files/kava.service/
+client.toml)
+
+
+Q. Are the EVM APIs enabled by default?
+
+A. Yes
+
+Q. What ports are used by the EVM API servers?
+
+A. By default, the RPC EVM API server listens on port `8545`, and the Websocket EVM API server listens on port `8546`. These values can be changed by updating the `address` and `ws-address` field values in the `[evm]` section of your node's app.toml and restarting the kava process.
