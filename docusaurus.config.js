@@ -37,7 +37,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: '',
+        title: 'Developer Docs',
         logo: {
           alt: 'Kava Logo',
           src: 'img/kava.svg',
@@ -64,6 +64,29 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+
+      // https://docusaurus.io/docs/search#connecting-algolia
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'FPOTVYBQZ6',
+        // Public API key: it is safe to commit it
+        apiKey: '05e2d0ec6c72b1b2b826330148aef3d6',
+        // Index name provided by Algolia
+        indexName: 'kava',
+
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push.
+        // Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        insights: false, // Optional, automatically send insights when user interacts with search results
+        // container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
+        debug: false, // Set debug to true if you want to inspect the modal
       },
     }),
 };
