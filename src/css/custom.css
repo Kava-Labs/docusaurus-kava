@@ -50,12 +50,6 @@
   border-bottom: 1px solid #7a8386;
 }
 
-.subtitleWrapper {
-  margin-left: 16px;
-  font-weight: 500;
-  color: #7a8386;
-}
-
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -65,19 +59,4 @@
 
 [data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
-}
-
-h3 {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-h4 {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.menu__link {
-  display: flex;
-  padding: 8px;
 }
