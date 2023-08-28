@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Kava Public Endpoints
 
-Kava Labs provides public API endpoints for the community to use for consuming and integrating with Kava(both mainnet and testnet), e.g. for setting up and syncing a new archive node or getting the latest block info.
+Kava Labs and Chainstack provide public API endpoints for the community to use for consuming and integrating with Kava, e.g. for setting up and syncing a new archive node or getting the latest block info.
 
 ## Pruning API
 
@@ -12,13 +12,25 @@ Pruning APIs provide information on the last 1000 blocks, and are useful for get
 
 ### Mainnet Pruning API Endpoints
 
+#### Kava Labs hosted:
+
 - api.kava.io - HTTP Rest Endpoint
 - rpc.kava.io - JSON-RPC Endpoint
 - grpc.kava.io - GRPC Endpoint
 - evm.kava.io - EVM JSON-RPC Endpoint
 - wevm.kava.io - EVM Websocket Endpoint
 
+#### Chainstack hosted:
+
+- api.kava.chainstacklabs.com - HTTP Rest Endpoint
+- rpc.kava.chainstacklabs.com - JSON-RPC Endpoint
+- grpc.kava.chainstacklabs.com - GRPC Endpoint
+- evm.kava.chainstacklabs.com - EVM JSON-RPC Endpoint
+- wevm.kava.chainstacklabs.com - EVM Websocket Endpoint
+
 ### Testnet Pruning API Endpoints
+
+#### Kava Labs hosted:
 
 - api.testnet.kava.io - HTTP Rest Endpoint
 - rpc.testnet.kava.io - JSON-RPC Endpoint
@@ -32,13 +44,25 @@ Archive APIs provide a complete historical record of all state on the chain from
 
 ### Mainnet Archive API Endpoints
 
+#### Kava Labs hosted:
+
 - api.data.kava.io - HTTP Rest Endpoint
 - rpc.data.kava.io - JSON-RPC Endpoint
 - grpc.data.kava.io - GRPC Endpoint
 - evm.data.kava.io - EVM JSON-RPC Endpoint
 - wevm.data.kava.io - EVM Websocket Endpoint
 
+#### Chainstack hosted:
+
+- api.data.kava.chainstacklabs.com - HTTP Rest Endpoint
+- rpc.data.kava.chainstacklabs.com - JSON-RPC Endpoint
+- grpc.data.kava.chainstacklabs.com - GRPC Endpoint
+- evm.data.kava.chainstacklabs.com - EVM JSON-RPC Endpoint
+- wevm.data.kava.chainstacklabs.com - EVM Websocket Endpoint
+
 ### Testnet Archive API Endpoints
+
+#### Kava Labs hosted:
 
 - api.data-testnet.kava.io - HTTP Rest Endpoint
 - rpc.data-testnet.kava.io - JSON-RPC Endpoint
@@ -48,8 +72,15 @@ Archive APIs provide a complete historical record of all state on the chain from
 
 ## Default API Rate Limits
 
-To provide fair use of Kava's public API capacity, request rate limits are enforced for consumers of the following endpoints as below
+To provide fair use of Kava's public API capacity, request rate limits are enforced for consumers of the following endpoints as below.
+
+#### Kava Labs hosted:
 
 - Mainnet Archive API: 100 requests per 5 minutes
 - Mainnet Pruning API: 1200 requests per 5 minutes
-- Testnet Archive API: 500 requests per 5 minute period
+- Testnet Archive API: 500 requests per 5 minutes
+
+#### Chainstack hosted:
+
+- Mainnet Archive API: 100 requests per 5 minutes
+- Mainnet Pruning API: 1200 requests per 5 minutes
