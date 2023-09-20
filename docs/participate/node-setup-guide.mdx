@@ -22,8 +22,16 @@ The monthly storage requirements for a node are as follows. These are estimated 
 
 - An archival node (pruning = "nothing") grows at a rate of ~100 GB per month
   Current total disk usage is 6TB, so a larger disk would be necessary.
-- A full pruning node (pruning = "everything") grows at a rate of ~5 GB per month`
+- A full pruning node (pruning = "everything") grows at a rate of ~5 GB per month
 - A default pruning node (pruning = “default”) grows at a rate of ~25 GB per month
+
+### Memory
+
+The minimum memory requirements for a node are as follows. These are estimated values based on experience, but should serve as a good guide.
+
+- An archival node (pruning = "nothing") should have at least 128GB of dedicated memory (256GB is optimal to avoid possible OOM errors due to other system utilization)
+- A full pruning node (pruning = "everything") should have at least 64GB of dedicated memory
+- A default pruning node (pruning = “default”) should have at least 64GB of dedicated memory
 
 ## Install Kava
 
@@ -77,68 +85,22 @@ Do the rest of the port configuration as desired; The EVM configuration and port
 
 ## Setting Up Your Pruning Node
 
-Follow the below steps to run a pruning node
+To setup a pruning node, you can:
 
-- Use snapshots from [Quicksync](https://quicksync.io/networks/kava.html)
-- Or sync without
+- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the .tar pruned file
+- Sync without the pruned file
+
+Please note that Quicksync’s pruning nodes snapshots should be run using Goleveldb flag for your setup.
 
 ## Setting Up Your Archival Node
 
-To setup an archival node, download the correct version of the kava node data and sync a node:
+To setup an archival node, you must download the correct version of the kava node data and sync a node:
 
-- If you have an Amazon account please proceed to [Obtaining Access to a Kava RocksDB Archival Node Snapshot](#obtaining-access-to-a-kava-rocksdb-archival-node-snapshot) section
-- If you don’t have an Amazon account please proceed to [Obtaining Access to a Kava RocksDB Archival Node Tar File](#obtaining-access-to-a-kava-rocksdb-archival-node-tar-file) section
+- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the archive .tar archive file to be used (please note that you should only download this file once)
+- Ensure you are using the correct network (current mainnet=kava_2222-10)
+- Ensure you compile your archive node with rocksdb flag for your setup
 
-Note that the current mainnet network is `kava_2222-10`.
-
-### Obtaining Access to a Kava RocksDB Archival Node Snapshot
-
-`For AWS users only`
-
-- Access to one-time Kava Archival RocksDB Node snapshots are available on request, when requesting access please provide the ID of an AWS Account for Kava Labs to share the AWS EBS snapshot with, for example 662225913111.
-
-- Once you have provided the above information, Kava Labs will provide you the ID of an AWS EBS Snapshot in the us-east-1 region that is shared with the specified AWS account ID, for example snap-02b578d1b339d69f2
-
-<u>
-  NOTE: The provided snapshot is only available for 2 days, if you do not follow
-  the below steps to create a volume from that snapshot you will have to submit
-  another request to get an updated and available snapshot ID
-</u>
-
-### Creating a New Volume Using AWS EBS Snapshot
-
-`For AWS users only`
-
-#### Launch EC2 Linux Instance
-
-[Launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) or use a currently running EC2 instance as the compute for running a Kava Archival Node. For an archive node, you will need at least 64GB of memory and a Linux-based operating system
-
-#### Create Volume Using Snapshot
-
-[Create](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html#ebs-create-volume-from-snapshot) an AWS EBS volume using the provided snapshot with at least 8TB of storage space
-
-#### Attach Volume To Snapshot
-
-[Attach](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html) and mount the created volume to your previously launched EC2 instance. The expected device name to use for mounting is /dev/sdk and the mount path should be `/data`
-
-### Import Kava RocksDB Archival Data
-
-Once the volume is mounted,
-
-1. Install the [latest](https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html) version of ZFS on your system
-2. Import data volume using `zpool import -f data data`
-3. copy the data directory (located at `/data/mainnet/kava`) at to the `/.kava/data` directory (located wherever you have initialized the Kava node)
-
-### Obtaining Access to a Kava RocksDB Archival Node Tar File
-
-`For non AWS users`
-
-This is only for users without an AWS account, if you already used the EBS snapshot you do not need to use this.
-
-- Contact the Kava team and they will provide you with a .tar archive file to be used (please note that you should only download this file once).
-- Once you have this downloaded proceed to the “Creating a New Data Folder Using Tar File” section.
-
-#### Creating a New Data Folder Using Node Tar File
+### Creating a New Data Folder Using Node Tar File
 
 <b>Requirements:</b>
 
@@ -152,24 +114,41 @@ sudo apt-get install zstd
 
 #### Steps:
 
-- Downloading the tar file
+1. Downloading the tar file
+
 - Example using aria2c:
 
 ```bash
 aria2c --continue -x16 --file-allocation=falloc
 ```
 
-- Extract the tar file
+2. Extract the tar file
 
 ```bash
 tar -I unzstd -xvf - -C /path/to/your/kava/data
 ```
 
-- Replace data directory in your kava directory with the extracted data if necessary.
+3. Replace data directory in your kava directory with the extracted data if necessary.
+
+Please note that Quicksync’s pruning nodes snapshots should be run using Goleveldb flag for your setup.
 
 ### Compiling Kava with RocksDB Support
 
-The provided snapshot is from a Kava mainnet node that uses RocksDB as the database backend. RocksDB is used as a more efficient and performant choice for Kava’s production infrastructure then the default GolevelDB database backend
+The provided quicksync archive snapshot is from a Kava mainnet node that uses RocksDB as the database backend. RocksDB is used as a more efficient and performant choice for Kava’s production infrastructure than the default GolevelDB database backend.
+
+#### Config Recommendations
+
+1. Set lazy loading on in the app.toml file for faster initial load (optional)
+
+```bash
+iavl-lazy-loading = true
+```
+
+2. Ensure rocksdb is enabled in the config.toml file
+
+```bash
+db_backend = "rocksdb"
+```
 
 #### Install RocksDB on your system
 
@@ -181,7 +160,11 @@ The provided snapshot is from a Kava mainnet node that uses RocksDB as the datab
 - Change into that directory
 - Run `make install COSMOS_BUILD_OPTIONS=rocksdb`
 
-### Syncing Your Node
+#### Building Kava using Docker Images
+
+If you are using docker to build kava using rocksdb please utilize the [docker file](https://github.com/Kava-Labs/kava/blob/master/Dockerfile-rocksdb) in your configuration.
+
+## Syncing Your Node
 
 To sync your node, you will use systemd, which manages the Kava daemon and automatically restarts it in case of failure. To use systemd, you will create a service file. Be sure to replace `<your_user>` with the user on your server:
 
