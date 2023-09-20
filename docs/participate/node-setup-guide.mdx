@@ -130,8 +130,6 @@ tar -I unzstd -xvf - -C /path/to/your/kava/data
 
 3. Replace data directory in your kava directory with the extracted data if necessary.
 
-Please note that Quicksync’s pruning nodes snapshots should be run using Goleveldb flag for your setup.
-
 ### Compiling Kava with RocksDB Support
 
 The provided quicksync archive snapshot is from a Kava mainnet node that uses RocksDB as the database backend. RocksDB is used as a more efficient and performant choice for Kava’s production infrastructure than the default GolevelDB database backend.
