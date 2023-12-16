@@ -75,11 +75,11 @@ After creating a private endpoint, you can secure it by adding API keys and appl
 You can test your private endpoint by making a HTTP request to it. Below is an example of a simple cURL command. 
 
 ```sh
-curl -X POST \
+curl https://lb.nodies.app/v1/<INSERT URL> \
 -H "x-api-key: <API-KEY>" \
+-X POST \
 -H "Content-Type: application/json" \
---data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' \
-"https://lb.nodies.app/v1/<INSERT URL>"
+--data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}' 
 ```
 
 **Step 4: View your Application statistics**
