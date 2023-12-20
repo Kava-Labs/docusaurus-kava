@@ -1,0 +1,120 @@
+---
+sidebar_position: 10
+title: Develop App Using Particle Network
+---
+
+# Develop App Using Particle Network
+
+[**Particle Network**](https://particle.network) is the Intent-Centric, Modular Access Layer of Web3. With Particle's Smart Wallet-as-a-Service, developers can curate an unparalleled user experience through modular and customizable EOA/AA embedded wallet components. Using MPC-TSS for key management, Particle can streamline user onboarding via familiar Web2 accounts—such as Google accounts, email addresses, and phone numbers.
+
+Specifically, Particle Network supports both Kava Mainnet and Testnet natively through it's EOA-based Wallet-as-a-Service, thus enabling complete social login functionality directly on Kava.
+
+Leveraging Particle Network to initiate wallet connection and interaction with your application is simple, below you'll find the basic steps required to get started.
+
+## Getting Started
+
+To begin leveraging Particle Network within your application on Kava, you'll need to first head over to the [Particle dashboard](https://dashboard.particle.network). Within here, you can create a project and an associated application within that project to retrieve three key values required for using Particle Network, your `projectId`, `clientKey`, and `appId`.
+
+These values will allow you to use both Particle Auth, the primary SDK offered by Particle Network to facilitate social logins and end-to-end application interaction, and Particle Connect, a secondary SDK for leveraging Particle's in-house connection modal, aggregating both social logins and external Web3 wallets such as MetaMask.
+
+This example will highlight Particle Auth, for additional information, see [Particle Network's documentation](https://docs.particle.network).
+
+## Installation and Configuration
+
+To install Particle Auth (specifically the Auth Core SDK), run one of the two following commands within your primary project directory:
+
+```js
+yarn add @particle-network/auth-core-modal @particle-network/chains
+
+// OR
+
+npm install @particle-network/auth-core-modal @particle-network/chains
+```
+
+Now that you've installed Particle Auth Core, you're ready to begin configuring Particle Network and using it within your application. For this example, we'll be using React. Particle Auth Core is primarily configured through `AuthCoreContextProvider`, which wraps your main `App` component (or it's equivalent) within your `index.ts` file. `AuthCoreContextProvider` requires the previously retrieved values (`projectId`, `clientKey`, and `appId`) to be configured and thus initialized. To set these values, alter your `index.ts` file to mimic the structure below:
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Kava } from '@particle-network/chains';
+import { AuthCoreContextProvider, PromptSettingType } from '@particle-network/auth-core-modal';
+import App from './App'
+
+import('buffer').then(({ Buffer }) => {
+  window.Buffer = Buffer;
+});
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <AuthCoreContextProvider
+      options={{
+        projectId: process.env.REACT_APP_PROJECT_ID,
+        clientKey: process.env.REACT_APP_CLIENT_KEY,
+        appId: process.env.REACT_APP_APP_ID,
+        themeType: 'dark', // Optional
+        fiatCoin: 'USD', // Optional
+        language: 'en', // Optional
+        promptSettingConfig: { // Optional, determines the security settings that a user has to configure
+          promptPaymentPasswordSettingWhenSign: PromptSettingType.first,
+          promptMasterPasswordSettingWhenLogin: PromptSettingType.first,
+        },
+        wallet: { // Optional, streamlines the wallet modal popup
+          visible: true,
+          customStyle: {
+            supportChains: [Kava],
+          }
+        },
+      }}
+    >
+    <App />
+      </AuthCoreContextProvider>
+  </React.StrictMode>
+)
+```
+
+## Utilizing Particle Network
+
+At this point, you've setup a project on the Particle dashboard, installed the required libraries, and configured Particle Network (Particle Auth Core) within your `index.ts` file. From here, you're ready to begin using Particle Auth within your application, this will be primarily facilitated through various hooks imported from `@particle-network/auth-core-modal`, such as `useEthereum`, `useAuthCore`, `useConnect`, etc.
+
+```js
+import React, { useState, useEffect } from 'react';
+
+import { useEthereum, useConnect, useAuthCore } from '@particle-network/auth-core-modal';
+import { Kava } from '@particle-network/chains';
+
+import { ethers } from 'ethers';
+
+const App = () => {
+  const { provider } = useEthereum();
+  const { connect, disconnect } = useConnect();
+  const { userInfo } = useAuthCore();
+
+  const customProvider = new ethers.providers.Web3Provider(provider, "any");
+
+  // Social login
+  const handleLogin = async (authType) => {
+    if (!userInfo) {
+      await connect({
+        socialType: authType,
+        chain: Kava,
+      });
+    }
+  };
+
+  // Sample transaction
+  const executeTx = async () => {
+    const signer = customProvider.getSigner();
+    console.log(await signer.getAddress())
+
+
+    const tx = {
+      to: "0x00000000000000000000000000000000000dEAD0",
+      value: ethers.utils.parseEther("0.001")
+    };
+
+    const txResponse = await signer.sendTransaction(tx);
+    const txReceipt = await txResponse.wait();
+  };
+```
+
+To learn more, take a look at the Particle Network Kava demo repository: https://github.com/TABASCOatw/particle-kava-demo, or run `npx particle-kava-demo`.
