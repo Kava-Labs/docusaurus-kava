@@ -1,0 +1,18 @@
+---
+sidebar_position: 4
+title: Golang Garbage Collection Optimizations
+---
+
+# Maximizing Sync Speed By Optimizing Golang Garbage Collection
+
+To maximize sync speed for validators and other network providers that are running pruning nodes, the following settings are recommended:
+
+- Minimum memory footprint - 64 GB, anything beyond 128 GB is unlikely to impact performance of a validator pruning node as there is a fixed amount of total block data eligible for being read into memory (as old blocks are pruned when new blocks are synched)
+- Start Kava process with environment variable and value `GOGC=900`; this instructs the golang garbage collector to wait until the heap has grown to 9x it's initial allocated size before running garbage collection
+- Start Kava process with environment variable `GOMEMLIMIT` set to 66% of the total memory available to the Kava process (e.g. `GOMEMLIMIT=40GB` for a node with 64 GB of memory) to ensure garbage collection runs whenever 66% of the total memory is used
+
+For a more in-depth explanation of the affects of the golang garbage collection values, refer to https://go.dev/doc/gc-guide, but in brief
+
+> The heap target controls GC frequency: the bigger the target, the longer the GC can wait to start another mark phase and vice versa. While the precise formula is useful for making estimates, it's best to think of GOGC in terms of its fundamental purpose: a parameter that picks a point in the GC CPU and memory trade-off. The key takeaway is that doubling GOGC will double heap memory overheads and roughly halve GC CPU cost, and vice versa. (To see a full explanation as to why, see the appendix.)
+
+Less time spent garbage collecting is more cpu cycles available for syncing new blocks, responding to requests, and less times where the garbage collection has to pause the program execution will make the tail latency for those events lower (i.e. the slowest time it takes for any of those events)
