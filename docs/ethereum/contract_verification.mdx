@@ -16,17 +16,48 @@ Once you have deployed your smart contracts, you can verify them on the
 npx hardhat flatten path/to/your/contract.sol
 ```
 
-2. [Find your deployed contract on the Kava explorer and follow the steps to verify][blockscout-verify].
-   If your contract has constructor arguments, ensure that you provide them in
-   the form. If you do not already have an ABI-encoded version of it, you can
-   use this [online ABI encoding tool][abi-encoder] to manually
-   create it. Additional information about ABI-Encoded constructor arguments can
-   be found on the [Blockscout documentation][blockscout-abi-constructor].
+2. Find your deployed contract on the [Kava explorer](https://kavascan.com) and follow the steps to verify.
+   Make sure you import the contract .sol files as well as a metadata.json file for verification
+
+## Via Standard-JSON-input file
+
+1. Find your standard-json-input file or generate one from the `artifacts/build-info/{hash}.json` file. An example is shown below
+``` bash
+{
+    "language": "Solidity",
+    "sources": {
+        "contracts/Storage.sol": {
+            "content": "// SPDX-License-Identifier: MIT\n\npragma solidity 0.8.19;\n\ncontract Storage {\n    uint public storage_box;\n\n    function store(uint _value) public {\n        storage_box = _value;\n    }\n\n    function retrieve() public view returns (uint) {\n        return storage_box;\n    }\n}\n"
+        }
+    },
+    "settings": {
+        "optimizer": {
+            "enabled": false,
+            "runs": 200
+        },
+        "outputSelection": {
+            "*": {
+                "*": [
+                    "abi",
+                    "evm.bytecode",
+                    "evm.deployedBytecode",
+                    "evm.methodIdentifiers",
+                    "metadata"
+                ],
+                "": [
+                    "ast"
+                ]
+            }
+        }
+    }
+}
+```
+2. Upload the standard-input-json file to the explorer to verify your contract
 
 ## Via Hardhat Verification Plugin
 
 You can also verify directly from your Hardhat development environment. This
-requires the [`hardhat-etherscan`][hardhat-etherscan] plugin. The Kava explorer uses [BlockScout]
+requires the [`hardhat-etherscan`][hardhat-etherscan] plugin. The Kava explorer uses [cosmostation API]
 which is compatible with the Hardhat Etherscan plugin.
 
 1. [Install the Hardhat Etherscan plugin][hardhat-etherscan], ensuring
@@ -44,14 +75,14 @@ module.exports = {
   // highlight-start
   etherscan: {
     apiKey: {
-      kava: "api key is not required by the Kava explorer, but can't be empty",
+      kava: "9MgwdOWmMs", //"api key is not required by the Kava explorer, but can't be empty",
     },
     customChains: [
       {
         network: 'kava',
         chainId: 2222,
         urls: {
-          apiURL: 'https://kavascan.com/api',
+          apiURL: 'https://api.verify.mintscan.io/evm/api/0x8ae',
           browserURL: 'https://kavascan.com',
         },
       },
@@ -80,23 +111,15 @@ Custom networks added by you or by plugins:
 ╚═════════╧══════════╝
 ```
 
-4. Verify the contract with `npx hardhat verify`. This may take a few minutes.
-   The following is an example of verifying an WKAVA contract.
+4. Verify the contract with `npx hardhat ignition verify <deployment-id>`. This may take a few minutes.
+   The following is an example of verifying a Storage contract.
 
 ```bash
-$ npx hardhat verify --network kava 0x52A87b0703C65a4C30657e7badc808855711CdEc
+$ npx hardhat ignition verify chain-2222
 
-Nothing to compile
-Generating typings for: 0 artifacts in dir: typechain-types for target: ethers-v5
-Successfully generated 3 typings!
-Successfully generated 3 typings for external artifacts!
-Compiling 1 file with 0.8.9
-Successfully submitted source code for contract
-contracts/WKAVA.sol:WKAVA at 0x52A87b0703C65a4C30657e7badc808855711CdEc
-for verification on the block explorer. Waiting for verification result...
-
-Successfully verified contract WKAVA on Etherscan.
-https://kavascan.com/address/0x52A87b0703C65a4C30657e7badc808855711CdEc?t=code
+Verifying contract "contracts/Storage.sol:Storage" for network kava...
+Successfully verified contract "contracts/Storage.sol:Storage" for network kava:
+  - https://kavascan.com/address/0xa8E48Fa04881DFacfC8d0aB84BC9bA57A449fc1F#code
 ```
 
 ## Troubleshooting
@@ -122,17 +145,22 @@ Remove all SPDX comments except one in your flattened file and try verifying
 again. Alternatively, use the hardhat verification plugin to preserve license
 identifiers.
 
+## Limitations
+
+* Contracts with `'` can't be verified, to fix remove any `'` from your contract before submitting it for verification
+* Contracts with flattened source code greater than 65000 characters can't be verified
+
 ## Resources
 
 - [Hardhat Verification Plugin][hardhat-etherscan]
-- [BlockScout Documentation][blockscout-docs]
 - [Online ABI encoding service][abi-encoder]
+- [Cosmostation Docs][cosmostation API]
 
 [abi-encoder]: https://abi.hashex.org/
 [explorer]: https://kavascan.com
 [hardhat]: https://hardhat.org/
 [hardhat-etherscan]: https://hardhat.org/plugins/nomiclabs-hardhat-etherscan
-[blockscout]: https://github.com/blockscout/blockscout
+[cosmostation API]: https://docs.cosmostation.io/contract/evm
 [blockscout-docs]: https://docs.blockscout.com/
 [blockscout-abi-constructor]: https://docs.blockscout.com/for-users/abi-encoded-constructor-arguments
 [blockscout-verify]: https://docs.blockscout.com/for-users/verifying-a-smart-contract
