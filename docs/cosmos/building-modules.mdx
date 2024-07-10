@@ -756,8 +756,10 @@ Or you can simply do:
 
 We should now have access to our greet commands that we defined first we will test creating a new greeting, for that we will run the following command:
 
-`kvtool kava -- tx greet create-greeting "hello world from kava chain" --from whale --fees 200ukava` \* If you get an error about `fees; got: required: 200ukava: insufficient fee`, update the `fees` to the required amount
-now let's test to see if the greeting message is able to be queried:
+`kvtool kava -- tx greet create-greeting "hello world from kava chain" --from whale --fees 200ukava`
+
+- If you get an error about `fees; got: required: 200ukava: insufficient fee`, update the `fees` to the required amount
+  now let's test to see if the greeting message is able to be queried:
 
 `kvtool kava -- q greet list-greetings`
 
