@@ -747,8 +747,11 @@ inside `app/app.go` start off importing the greet module, it's types & keeper pa
      - Names: `generated-kavanode-1`
 
 You can verify by querying the remote node for status by running commands inside containers:
+
 `kvtool testnet dc exec kavanode -- kava status`
+
 Or you can simply do:
+
 `kvtool kava -- status`
 
 We should now have access to our greet commands that we defined first we will test creating a new greeting, for that we will run the following command:
