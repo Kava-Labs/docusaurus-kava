@@ -85,20 +85,37 @@ Do the rest of the port configuration as desired; The EVM configuration and port
 
 ## Setting Up Your Pruning Node
 
-To setup a pruning node, you can:
+To setup a pruning node, you can get started using one of the following:
 
-- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the .tar pruned file
-- Sync without the pruned file
+- [Nodies](https://www.nodies.app/snapshot/kava) provides snapshots hosted in multiple regions for faster access. Download the latest pruned goleveldb snapshot using aria2c (detailed guide [here](https://docs.nodies.app/snapshot-services/downloading-snapshots)):
+```bash
+### Options: 'de' for Europe, 'sgp' for Asia
+export REGION=de
 
-Please note that Quicksync’s pruning nodes snapshots should be run using Goleveldb flag for your setup.
+aria2c -s 10 -x 10 https://download.nodies.org/download/latest/snapshot/${REGION}/kava/mainnet/pruned
+
+```
+- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the .tar pruned snapshot file
+- Sync without the pruned snapshot file
+
+**Please note that Quicksync’s and Nodies' pruned snapshots should be run using Goleveldb flag for your setup.**
 
 ## Setting Up Your Archival Node
 
 To setup an archival node, you must download the correct version of the kava node data and sync a node:
 
-- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the archive .tar archive file to be used (please note that you should only download this file once)
+- [Nodies](https://www.nodies.app/snapshot/kava) provides snapshots hosted in multiple regions for faster access. Download the latest archive rocksdb snapshot using aria2c (detailed guide [here](https://docs.nodies.app/snapshot-services/downloading-snapshots)):
+```bash
+### Options: 'de' for Europe, 'sgp' for Asia
+export REGION=de
+
+aria2c -s 10 -x 10 https://download.nodies.org/download/latest/snapshot/${REGION}/kava/mainnet/archive
+
+```
+- Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the archive .tar snapshot file to be used (please note that you should only download this file once)
 - Ensure you are using the correct network (current mainnet=kava_2222-10)
-- Ensure you compile your archive node with rocksdb flag for your setup
+
+**Please ensure you compile your archive node with rocksdb flag for your setup.**
 
 ### Creating a New Data Folder Using Node Tar File
 
