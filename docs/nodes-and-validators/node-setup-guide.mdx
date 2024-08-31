@@ -89,11 +89,10 @@ To setup a pruning node, you can get started using one of the following:
 
 - [Nodies](https://www.nodies.app/snapshot/kava) provides snapshots hosted in multiple regions for faster access. Download the latest pruned goleveldb snapshot using aria2c (detailed guide [here](https://docs.nodies.app/snapshot-services/downloading-snapshots)):
 ```bash
-### Options: 'de' for Europe, 'sgp' for Asia
+### Options: 'de' for Europe, 'use' for US, 'sgp' for Asia
 export REGION=de
 
 aria2c -s 10 -x 10 https://download.nodies.org/download/latest/snapshot/${REGION}/kava/mainnet/pruned
-
 ```
 - Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the .tar pruned snapshot file
 - Sync without the pruned snapshot file
@@ -106,11 +105,10 @@ To setup an archival node, you must download the correct version of the kava nod
 
 - [Nodies](https://www.nodies.app/snapshot/kava) provides snapshots hosted in multiple regions for faster access. Download the latest archive rocksdb snapshot using aria2c (detailed guide [here](https://docs.nodies.app/snapshot-services/downloading-snapshots)):
 ```bash
-### Options: 'de' for Europe, 'sgp' for Asia
+### Options: 'de' for Europe, 'use' for US, 'sgp' for Asia
 export REGION=de
 
 aria2c -s 10 -x 10 https://download.nodies.org/download/latest/snapshot/${REGION}/kava/mainnet/archive
-
 ```
 - Go to [Quicksync](https://quicksync.io/networks/kava.html) and download the archive .tar snapshot file to be used (please note that you should only download this file once)
 - Ensure you are using the correct network (current mainnet=kava_2222-10)
