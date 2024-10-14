@@ -2,16 +2,51 @@
 title: RedStone
 sidebar_position: 4
 ---
+# RedStone Oracles
 
-## RedStone
+RedStone delivers frequently updated, reliable, and diverse data feeds to your dApp. RedStone is unique in several ways, with three key aspects standing out:
 
-[RedStone](https://redstone.finance/) delivers frequently updated, reliable, and diverse data feeds for your dApp on Manta Pacific L2. RedStone is unique in many aspects, three notable ones are:
-- The most gas-optimized oracle (make your dApp scalable)
-- Unique price feeds (including LSTs, LRTs, RWAs and Manta-native assets)
-- Modular Oracle Design allows for flexibility towards user needs
+- **RedStone provides price feeds for new in-demand assets.**  
+  RedStone quickly launches unavailable price feeds for new assets like LSTs, LRTs, Bitcoin LSTs, and new types of stablecoins. They are the leading oracle for yield-bearing assets and offer different types of price feeds, including Market Price, Fundamental Contract Ratio, Net Asset Value/Proof of Reserves, and others.
 
-RedStone operates in two models Core (Pull) and Classic (Push) both available on Kava. Please see the specific steps and ready code samples in [the Docs](https://docs.redstone.finance/docs/smart-contract-devs/get-started/redstone-core).
+- **RedStone’s price feeds are relied on by the most trusted lending markets in the space.**  
+  RedStone secures billions of dollars across mainnets. Protocols like Pendle, Venus, Morpho, Silo, Gearbox, LayerBank, and Euler rely on RedStone’s price feeds to secure their users' funds. An extensive list of our clients can be found [here](https://redstone.finance/clients).
 
-All available Classic feeds are available in [here](https://docs.redstone.finance/docs/smart-contract-devs/price-feeds).
+- **RedStone takes a security-first approach.**  
+  RedStone has never experienced a mispricing event. It provides the deepest price discovery on the market, infrastructure redundancy, heavy-duty monitoring, and regular audits to keep users' funds secure. They are a tech-first team, consisting of seasoned engineers with plenty of PhDs in Computer Science, Cryptography, and Mathematics.
 
-If you need help with integration join [RedStone Discord](https://discord.com/invite/PVxBZKFr46) and ask their team for help.
+---
+
+## RedStone Models
+
+RedStone Oracles operates two distinct oracle models: the [Push Model](https://docs.redstone.finance/docs/get-started/models/redstone-push/) and the [Pull Model](https://docs.redstone.finance/docs/get-started/models/redstone-pull/).
+
+- **Push Model**: You can explore the available data feeds for the Push Model [here](https://app.redstone.finance/app/feeds/).
+- **Pull Model**: The data feeds for the Pull Model can be found [here](https://app.redstone.finance/app/pull-model/redstone-primary-prod/).
+
+For a live demonstration of RedStone’s price feeds, visit the demo page [here](https://app.redstone.finance/app/tokens/).
+
+---
+
+## How to Integrate The RedStone Push Model
+
+The RedStone Push model ensures that data is pushed into on-chain storage via a relayer. It is designed for protocols compatible with the traditional Push Oracle model that require full control of the data sources and update conditions (heartbeat and deviation threshold).
+
+The on-chain contracts in The Push Model enable storing prices and accessing them through a familiar interface (e.g., the Chainlink AggregatorV3).
+
+---
+
+## How to Integrate The RedStone Pull Model
+
+The RedStone Pull Model allows your dApp to utilize data feeds delivered "on-demand," meaning the data is only fetched when needed by the dApp. By integrating the EVM-connector library and extending your use of Ethers.js, your dApp can attach signed data packages with timestamps to the call data of user transactions.
+
+In order to implement The Pull Model, you will need to do two things:
+
+1. Adjust the Javascript code of your dApp to inject the additional payload with signed data feeds to the call data of your users’ transactions.
+2. Adjust your smart contracts to include the libraries responsible for data extraction from call data and signature verification.
+
+Please see the specific steps and ready code samples [here](https://github.com/redstone-finance/redstone-evm-examples).
+
+---
+
+If you need help with integration, join the [RedStone Discord](https://discord.com/invite/PVxBZKFr46) and ask the team for assistance.
