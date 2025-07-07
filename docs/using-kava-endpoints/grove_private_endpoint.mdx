@@ -1,0 +1,60 @@
+# Private Endpoints - Grove
+
+If you're building decentralized applications on KAVA's EVM, you'll need a dependable RPC service to access its full capabilities. This tutorial will show you how to set up your own private RPC endpoints using Grove, a premium RPC provider.
+
+## Who are Grove?
+
+Grove are the builders and maintainers of [Pocket Network](https://pocket.network) the original decentralized RPC protocol dating back to 2018. 
+
+Grove builds and maintains an enterprise grade quality layer on top of the decentralized Pocket Network, [PATH](https://github.com/buildwithgrove/path), which is also vendored as a SaaS app at https://portal.grove.city
+
+## What is an RPC endpoint?
+
+An RPC (Remote Procedure Call) endpoint is a network address used by software applications to request and receive data from a remote server or service. In the context of blockchain, an RPC endpoint is used to access the blockchain data and execute transactions on the network.
+
+## Benefits of a private endpoint
+
+- **Avoid Rate Limiting:** Public endpoints provided by certain service providers may have rate limits or usage restrictions. Private endpoints typically offer more generous usage limits or may not have them at all, ensuring your application can function without interruptions.
+- **Performance:** Private endpoints provide more consistent and predictable performance because they are not shared with a large number of users. This can be critical for applications that require low latency and high throughput.
+- **Control:** With a private RPC endpoint, you have full control over who can access your endpoint. You can grant permissions on a per-user basis to ensure that only trusted parties can view or manage your endpoint.
+- **Reliability:** By having your own endpoint, you can ensure that your
+  application is not impacted by the performance or availability of shared
+  endpoints. This means your application will have greater uptime and
+  reliability.
+
+## Accounts and Applications
+
+- Your Grove User account is organized into Accounts and Applications.
+  - Team members can be assigned to Accounts.
+  - Team members can be assigned roles that define access to the Account and Applications.
+- An Application contains endpoints that can be used for all networks currently supported by Grove.
+  - Statistics can be viewed on the account and application level.
+
+## Usage Tiers
+
+Grove supports a public endpoint and two private plans:
+
+- **Public Endpoint**: https://kava.rpc.grove.city/v1/01fdb492
+- **Free**: Provides 150,000 Monthly Relays throttled at 30 RPS. Relays can be used on any supported network.
+- **Unlimited**: Exactly what is says. Unlimited Relays at unlimited RPS. Flat rate of $5 / million relays.
+
+## Registration and Usage
+
+**Step 1: Create an account at [https://portal.grove.city](https://portal.grove.city).**
+
+We provide multiple methods for registration to cater to various user preferences:
+
+- **Email and Password:** You can register using your email address and a unique password.
+- **Google Login:** Leverage your existing Google account to register quickly and conveniently.
+- **Github Login:** Use your Github account credentials for easy registration.
+
+**Step 2: Copy and Test your private Kava endpoint**
+
+You can test your private endpoint by making a HTTP request to it. Below is an example of a simple cURL command.
+
+```sh
+curl https://kava.rpc.grove.city/v1/<INSERT URL> \
+-X POST \
+-H "Content-Type: application/json" \
+--data '{"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}'
+```
